@@ -1,0 +1,49 @@
+.dial-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-top: 20px;
+  overflow: visible;
+}
+
+.dial-glow-ring {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 560px;
+  height: 280px;
+  border-radius: 280px 280px 0 0;
+  background: transparent;
+  border: 1px solid rgba(0, 245, 255, 0.08);
+  box-shadow:
+    0 0 60px rgba(0, 245, 255, 0.06),
+    inset 0 0 60px rgba(0, 245, 255, 0.04);
+  pointer-events: none;
+}
+
+.dial-svg {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  overflow: visible;
+}
+
+.dial-seg {
+  transition: opacity 0.2s ease;
+}
+.dial-seg:hover path,
+.dial-seg.active path {
+  transition: opacity 0.2s ease, stroke-width 0.2s ease;
+}
+
+.dial-bottom-label {
+  margin-top: -4px;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(0, 245, 255, 0.6);
+  font-family: 'Courier New', monospace;
+}
