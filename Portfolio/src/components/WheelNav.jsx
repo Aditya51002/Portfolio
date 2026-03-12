@@ -1,321 +1,295 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
+import { FaUser, FaCode, FaRocket, FaBriefcase, FaTrophy, FaGraduationCap, FaEnvelope } from 'react-icons/fa';
 
 const SECTIONS = [
-  { id: 'about', label: 'About', icon: '👤', color: '#00f5ff', angle: 0 },
-  { id: 'skills', label: 'Skills', icon: '⚡', color: '#a855f7', angle: 60 },
-  { id: 'projects', label: 'Projects', icon: '🚀', color: '#f59e0b', angle: 120, hasSubWheel: true },
-  { id: 'experience', label: 'Experience', icon: '💼', color: '#10b981', angle: 180 },
-  { id: 'certifications', label: 'Certifications', icon: '🏆', color: '#ef4444', angle: 240 },
-  { id: 'contact', label: 'Contact', icon: '📬', color: '#ec4899', angle: 300 },
+  { id: 'about', label: 'About', icon: FaUser, color: '#3B82F6' },
+  { id: 'skills', label: 'Skills', icon: FaCode, color: '#22D3EE' },
+  { id: 'projects', label: 'Projects', icon: FaRocket, color: '#6366F1' },
+  { id: 'experience', label: 'Experience', icon: FaBriefcase, color: '#10B981' },
+  { id: 'achievements', label: 'Achievements', icon: FaTrophy, color: '#F59E0B' },
+  { id: 'education', label: 'Education', icon: FaGraduationCap, color: '#EC4899' },
+  { id: 'contact', label: 'Contact', icon: FaEnvelope, color: '#EF4444' },
 ];
 
 export default function WheelNav({ onSectionSelect, onClose }) {
   const [hoveredSection, setHoveredSection] = useState(null);
-  const [selectedSection, setSelectedSection] = useState(null);
+  const [activeSection, setActiveSection] = useState(null);
 
-  const handleSectionClick = (section) => {
-    setSelectedSection(section.id);
-    if (section.hasSubWheel) {
-      // Don't close immediately for sections with sub-wheels
-      return;
-    }
+  const handleClick = (section) => {
+    setActiveSection(section.id);
     setTimeout(() => {
       onSectionSelect(section.id);
-    }, 500);
+    }, 400);
   };
 
-  const handleSubWheelClose = () => {
-    setSelectedSection(null);
-  };
+  const radius = 220;
+  const segmentAngle = 360 / SECTIONS.length;
 
   return (
     <motion.div
-      className="fixed inset-0 z-40 flex items-center justify-center bg-[#060b14]/95 backdrop-blur-sm"
+      className="fixed inset-0 z-40 flex items-center justify-center bg-hud-bg/95 backdrop-blur-md"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      transition={{ duration: 0.4 }}
     >
-      {/* Background grid */}
-      <div className="absolute inset-0 bg-[radial-gradient(rgba(0,245,255,0.1)_1px,transparent_1px)] bg-[size:40px_40px]" />
+      {/* Radial grid background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Concentric rings */}
+        {[1, 2, 3, 4].map((r) => (
+          <motion.div
+            key={r}
+            className="absolute rounded-full border border-hud-primary/5"
+            style={{
+              width: `${r * 200}px`,
+              height: `${r * 200}px`,
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            }}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: r * 0.1, duration: 0.6 }}
+          />
+        ))}
 
-      {/* Center logo/close button */}
-      <motion.button
-        className="absolute z-10 w-24 h-24 rounded-full bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-neon-blue/50 flex items-center justify-center text-3xl font-bold text-neon-blue hover:scale-110 transition-transform shadow-[0_0_30px_rgba(0,245,255,0.3)]"
+        {/* Cross-hair lines */}
+        <motion.div
+          className="absolute top-1/2 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-hud-primary/10 to-transparent"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+        />
+        <motion.div
+          className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-hud-primary/10 to-transparent"
+          initial={{ scaleY: 0 }}
+          animate={{ scaleY: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+        />
+      </div>
+
+      {/* ═══ Rotating outer ring ═══ */}
+      <motion.div
+        className="absolute rounded-full border border-hud-primary/20"
+        style={{
+          width: `${radius * 2 + 120}px`,
+          height: `${radius * 2 + 120}px`,
+        }}
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1, rotate: 360 }}
+        transition={{
+          scale: { delay: 0.2, duration: 0.6, type: 'spring' },
+          rotate: { duration: 30, repeat: Infinity, ease: 'linear' },
+        }}
+      >
+        {/* Small dots on outer ring */}
+        {[...Array(24)].map((_, i) => {
+          const a = (i * 15 * Math.PI) / 180;
+          const r2 = radius + 60;
+          return (
+            <div
+              key={i}
+              className="absolute w-1 h-1 rounded-full bg-hud-primary/30"
+              style={{
+                left: `calc(50% + ${Math.cos(a) * r2}px - 2px)`,
+                top: `calc(50% + ${Math.sin(a) * r2}px - 2px)`,
+              }}
+            />
+          );
+        })}
+      </motion.div>
+
+      {/* ═══ Inner decorative ring ═══ */}
+      <motion.div
+        className="absolute rounded-full border border-hud-accent/15"
+        style={{
+          width: `${radius * 2 - 60}px`,
+          height: `${radius * 2 - 60}px`,
+        }}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1, rotate: -360 }}
+        transition={{
+          scale: { delay: 0.3, duration: 0.5, type: 'spring' },
+          rotate: { duration: 20, repeat: Infinity, ease: 'linear' },
+        }}
+      />
+
+      {/* ═══ Center hub ═══ */}
+      <motion.div
+        className="absolute z-20 w-32 h-32 rounded-full glass-strong flex flex-col items-center justify-center cursor-pointer shadow-[0_0_40px_rgba(59,130,246,0.2)]"
         onClick={onClose}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
         initial={{ scale: 0, rotate: -180 }}
         animate={{ scale: 1, rotate: 0 }}
-        transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
+        transition={{ delay: 0.4, type: 'spring', stiffness: 200 }}
+        whileHover={{ scale: 1.08, boxShadow: '0 0 60px rgba(59,130,246,0.4)' }}
+        whileTap={{ scale: 0.95 }}
       >
-        ✕
-      </motion.button>
+        <span className="font-orbitron text-sm font-bold bg-gradient-to-r from-hud-primary to-hud-accent bg-clip-text text-transparent leading-tight">
+          Aditya
+        </span>
+        <span className="font-orbitron text-sm font-bold bg-gradient-to-r from-hud-accent to-hud-hover bg-clip-text text-transparent leading-tight">
+          Maurya
+        </span>
+        <span className="text-[10px] font-rajdhani text-gray-500 mt-1 tracking-wider uppercase">
+          Portfolio Interface
+        </span>
+      </motion.div>
 
-      {/* Circular wheel sections */}
-      <div className="relative w-[600px] h-[600px]">
+      {/* ═══ Arc segments / Navigation items ═══ */}
+      <div className="relative" style={{ width: `${radius * 2 + 40}px`, height: `${radius * 2 + 40}px` }}>
         {SECTIONS.map((section, index) => {
-          const isHovered = hoveredSection === section.id;
-          const isSelected = selectedSection === section.id;
-          const isOtherSelected = selectedSection && selectedSection !== section.id;
-          
-          // Calculate position on circle
-          const radius = 220;
-          const angleRad = (section.angle * Math.PI) / 180;
+          const angle = -90 + index * segmentAngle;
+          const angleRad = (angle * Math.PI) / 180;
           const x = Math.cos(angleRad) * radius;
           const y = Math.sin(angleRad) * radius;
+          const isHovered = hoveredSection === section.id;
+          const isActive = activeSection === section.id;
+          const isOtherActive = activeSection && activeSection !== section.id;
+          const Icon = section.icon;
 
           return (
             <motion.div
               key={section.id}
-              className="absolute top-1/2 left-1/2 cursor-pointer"
+              className="absolute cursor-pointer"
               style={{
-                transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
+                left: `calc(50% + ${x}px)`,
+                top: `calc(50% + ${y}px)`,
+                transform: 'translate(-50%, -50%)',
               }}
               initial={{ scale: 0, opacity: 0 }}
               animate={{
-                scale: isOtherSelected ? 0.7 : 1,
-                opacity: isOtherSelected ? 0.3 : 1,
+                scale: isOtherActive ? 0.7 : 1,
+                opacity: isOtherActive ? 0.3 : 1,
+                filter: isOtherActive ? 'blur(3px)' : 'blur(0px)',
               }}
               transition={{
-                type: "spring",
-                stiffness: 200,
-                delay: index * 0.1,
+                type: 'spring',
+                stiffness: 180,
+                delay: 0.3 + index * 0.08,
               }}
               onMouseEnter={() => setHoveredSection(section.id)}
               onMouseLeave={() => setHoveredSection(null)}
-              onClick={() => handleSectionClick(section)}
-              whileHover={{ scale: 1.2 }}
+              onClick={() => handleClick(section)}
+              whileHover={{ scale: 1.15 }}
               whileTap={{ scale: 0.9 }}
             >
-              {/* Glow effect */}
+              {/* Glow backdrop */}
               <motion.div
-                className="absolute inset-0 rounded-full blur-xl"
+                className="absolute inset-0 rounded-2xl blur-xl"
                 style={{ backgroundColor: section.color }}
                 animate={{
-                  opacity: isHovered || isSelected ? 0.6 : 0.2,
-                  scale: isHovered || isSelected ? 1.5 : 1,
+                  opacity: isHovered || isActive ? 0.5 : 0.1,
+                  scale: isHovered || isActive ? 1.8 : 1,
                 }}
+                transition={{ duration: 0.3 }}
               />
 
-              {/* Main circle */}
+              {/* Segment card */}
               <motion.div
-                className="relative w-28 h-28 rounded-full flex flex-col items-center justify-center gap-1 border-2 backdrop-blur-sm"
+                className="relative w-24 h-24 rounded-2xl flex flex-col items-center justify-center gap-2 backdrop-blur-md border transition-colors duration-200"
                 style={{
-                  borderColor: section.color,
-                  backgroundColor: `${section.color}20`,
-                }}
-                animate={{
-                  filter: isOtherSelected ? 'blur(4px)' : 'blur(0px)',
+                  borderColor: isHovered || isActive ? section.color : `${section.color}40`,
+                  backgroundColor: isHovered || isActive ? `${section.color}20` : `${section.color}08`,
+                  boxShadow: isHovered || isActive
+                    ? `0 0 25px ${section.color}40, inset 0 0 25px ${section.color}10`
+                    : 'none',
                 }}
               >
-                {/* Icon */}
-                <motion.div
-                  className="text-4xl"
-                  animate={{
-                    scale: isHovered ? 1.2 : 1,
-                    rotate: isHovered ? 15 : 0,
+                <Icon
+                  className="text-2xl transition-transform duration-200"
+                  style={{
+                    color: section.color,
+                    transform: isHovered ? 'scale(1.2)' : 'scale(1)',
+                    filter: isHovered ? `drop-shadow(0 0 8px ${section.color})` : 'none',
                   }}
-                >
-                  {section.icon}
-                </motion.div>
-
-                {/* Label */}
-                <motion.div
-                  className="text-sm font-semibold uppercase tracking-wider"
+                />
+                <span
+                  className="text-[11px] font-orbitron font-semibold tracking-wider uppercase"
                   style={{ color: section.color }}
                 >
                   {section.label}
-                </motion.div>
+                </span>
               </motion.div>
 
               {/* Connection line to center */}
-              <motion.div
-                className="absolute top-1/2 left-1/2 h-0.5 origin-left"
+              <svg
+                className="absolute pointer-events-none"
                 style={{
-                  width: `${radius}px`,
-                  backgroundColor: section.color,
-                  transform: `translate(-50%, -50%) rotate(${section.angle + 180}deg)`,
-                  opacity: 0.2,
-                }}
-                animate={{
-                  opacity: isHovered || isSelected ? 0.6 : 0.1,
+                  width: `${Math.abs(x) + 50}px`,
+                  height: `${Math.abs(y) + 50}px`,
+                  left: x > 0 ? '-12px' : 'auto',
+                  right: x <= 0 ? '-12px' : 'auto',
+                  top: y > 0 ? '-12px' : 'auto',
+                  bottom: y <= 0 ? '-12px' : 'auto',
+                  overflow: 'visible',
+                  opacity: 0,
                 }}
               />
-
-              {/* Orbiting particles */}
-              <AnimatePresence>
-                {(isHovered || isSelected) && (
-                  <>
-                    {[...Array(3)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className="absolute w-2 h-2 rounded-full"
-                        style={{ backgroundColor: section.color }}
-                        initial={{ opacity: 0 }}
-                        animate={{
-                          opacity: [0, 1, 0],
-                          scale: [0, 1, 0],
-                          x: [0, Math.cos((i * 120 + Date.now() / 10) * Math.PI / 180) * 60],
-                          y: [0, Math.sin((i * 120 + Date.now() / 10) * Math.PI / 180) * 60],
-                        }}
-                        exit={{ opacity: 0 }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          delay: i * 0.3,
-                        }}
-                      />
-                    ))}
-                  </>
-                )}
-              </AnimatePresence>
             </motion.div>
           );
         })}
 
-        {/* Rotating outer ring */}
-        <motion.div
-          className="absolute inset-0 rounded-full border-2 border-neon-blue/20"
-          style={{
-            width: '500px',
-            height: '500px',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-          }}
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        />
+        {/* Radial lines connecting center to each segment */}
+        <svg
+          className="absolute inset-0 pointer-events-none"
+          style={{ width: '100%', height: '100%' }}
+          viewBox={`0 0 ${radius * 2 + 40} ${radius * 2 + 40}`}
+        >
+          {SECTIONS.map((section, index) => {
+            const angle = -90 + index * segmentAngle;
+            const angleRad = (angle * Math.PI) / 180;
+            const centerX = radius + 20;
+            const centerY = radius + 20;
+            const endX = centerX + Math.cos(angleRad) * (radius - 40);
+            const endY = centerY + Math.sin(angleRad) * (radius - 40);
+            const isHovered = hoveredSection === section.id;
 
-        {/* Inner ring */}
-        <motion.div
-          className="absolute rounded-full border border-purple-500/30"
-          style={{
-            width: '350px',
-            height: '350px',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-          }}
-          animate={{ rotate: -360 }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        />
+            return (
+              <motion.line
+                key={section.id}
+                x1={centerX}
+                y1={centerY}
+                x2={endX}
+                y2={endY}
+                stroke={section.color}
+                strokeWidth="1"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: isHovered ? 0.4 : 0.08 }}
+                transition={{ duration: 0.3 }}
+                strokeDasharray="4 4"
+              />
+            );
+          })}
+        </svg>
       </div>
 
-      {/* Instructions */}
-      <motion.p
-        className="absolute bottom-10 text-gray-400 text-sm"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8 }}
-      >
-        Click a section to explore • Press center to close
-      </motion.p>
-
-      {/* Sub-wheel for Projects */}
+      {/* ═══ Hovered section label ═══ */}
       <AnimatePresence>
-        {selectedSection === 'projects' && (
-          <SubWheel section="projects" onClose={handleSubWheelClose} onSelect={onSectionSelect} />
+        {hoveredSection && (
+          <motion.div
+            className="absolute bottom-16 font-rajdhani text-lg tracking-widest uppercase text-gray-400"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.2 }}
+          >
+            <span style={{ color: SECTIONS.find(s => s.id === hoveredSection)?.color }}>
+              {`[ ${hoveredSection} ]`}
+            </span>
+          </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
-  );
-}
 
-// Sub-wheel component for Projects
-function SubWheel({ section, onClose, onSelect }) {
-  const projectCategories = [
-    { id: 'mern', label: 'MERN', icon: '🌐', color: '#00f5ff', angle: 0 },
-    { id: 'android', label: 'Android', icon: '📱', color: '#3DDC84', angle: 72 },
-    { id: 'ai', label: 'AI', icon: '🤖', color: '#a855f7', angle: 144 },
-    { id: 'webapps', label: 'Web Apps', icon: '💻', color: '#f59e0b', angle: 216 },
-    { id: 'opensource', label: 'Open Source', icon: '🌟', color: '#ec4899', angle: 288 },
-  ];
-
-  return (
-    <motion.div
-      className="absolute inset-0 bg-[#060b14]/98 flex items-center justify-center z-50"
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.8 }}
-    >
-      {/* Back button */}
-      <motion.button
-        className="absolute z-10 w-20 h-20 rounded-full bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-purple-500/50 flex items-center justify-center text-2xl font-bold text-purple-400 hover:scale-110 transition-transform shadow-[0_0_30px_rgba(168,85,247,0.3)]"
-        onClick={onClose}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
+      {/* Bottom instruction */}
+      <motion.p
+        className="absolute bottom-8 text-gray-600 text-xs font-rajdhani tracking-widest uppercase"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
       >
-        ←
-      </motion.button>
-
-      {/* Title */}
-      <motion.h2
-        className="absolute top-20 text-3xl font-bold text-white"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-      >
-        Select Project Category
-      </motion.h2>
-
-      {/* Sub-wheel sections */}
-      <div className="relative w-[500px] h-[500px]">
-        {projectCategories.map((category, index) => {
-          const radius = 160;
-          const angleRad = (category.angle * Math.PI) / 180;
-          const x = Math.cos(angleRad) * radius;
-          const y = Math.sin(angleRad) * radius;
-
-          return (
-            <motion.div
-              key={category.id}
-              className="absolute top-1/2 left-1/2 cursor-pointer"
-              style={{
-                transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
-              }}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{
-                type: "spring",
-                stiffness: 200,
-                delay: index * 0.1,
-              }}
-              onClick={() => {
-                onSelect(`projects-${category.id}`);
-              }}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <motion.div
-                className="absolute inset-0 rounded-full blur-xl"
-                style={{ backgroundColor: category.color }}
-                animate={{
-                  opacity: [0.3, 0.6, 0.3],
-                  scale: [1, 1.3, 1],
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-
-              <motion.div
-                className="relative w-24 h-24 rounded-full flex flex-col items-center justify-center gap-1 border-2 backdrop-blur-sm"
-                style={{
-                  borderColor: category.color,
-                  backgroundColor: `${category.color}30`,
-                }}
-              >
-                <div className="text-3xl">{category.icon}</div>
-                <div
-                  className="text-xs font-semibold uppercase"
-                  style={{ color: category.color }}
-                >
-                  {category.label}
-                </div>
-              </motion.div>
-            </motion.div>
-          );
-        })}
-      </div>
+        Select a module to explore • Click center to return
+      </motion.p>
     </motion.div>
   );
 }

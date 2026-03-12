@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ============================================================
-   Portfolio — Global Reset & Base Styles
-   ============================================================ */
-
 @layer base {
   *, *::before, *::after {
     box-sizing: border-box;
@@ -14,38 +10,31 @@
   }
 
   :root {
-    font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
     line-height: 1.5;
     font-weight: 400;
     color-scheme: dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #060b14;
+    color: #F8FAFC;
+    background-color: #0F172A;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    /* Custom scrollbar */
     scrollbar-width: thin;
-    scrollbar-color: rgba(0,245,255,0.3) rgba(255,255,255,0.03);
+    scrollbar-color: rgba(59,130,246,0.3) rgba(255,255,255,0.03);
   }
 
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: rgba(255,255,255,0.03); }
-  ::-webkit-scrollbar-thumb { background: rgba(0,245,255,0.3); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.3); border-radius: 3px; }
 
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
 
   body {
     margin: 0;
     min-width: 320px;
     min-height: 100vh;
-    background-color: #060b14;
-    /* Subtle dot-grid background pattern */
-    background-image: radial-gradient(rgba(0,245,255,0.07) 1px, transparent 1px);
-    background-size: 32px 32px;
+    background-color: #0F172A;
   }
 
   #root {
@@ -54,28 +43,40 @@
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1.2;
-}
+h1, h2, h3, h4, h5, h6 { line-height: 1.2; }
+a { text-decoration: none; color: inherit; }
+img, svg { display: block; max-width: 100%; }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-img, svg {
-  display: block;
-  max-width: 100%;
-}
-
-/* Smooth scroll for anchor links */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Selection colour */
 ::selection {
-  background: rgba(0, 245, 255, 0.25);
+  background: rgba(59, 130, 246, 0.25);
   color: #fff;
 }
 
+/* Glassmorphism utility */
+@layer components {
+  .glass {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(59, 130, 246, 0.15);
+  }
+
+  .glass-strong {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+
+  .neon-text {
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+
+  .neon-text-accent {
+    text-shadow: 0 0 10px rgba(34, 211, 238, 0.5), 0 0 20px rgba(34, 211, 238, 0.3);
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16;
+  }
+}

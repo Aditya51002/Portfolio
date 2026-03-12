@@ -1,51 +1,80 @@
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
+import { FaReact, FaNodeJs, FaPython, FaDocker, FaGitAlt, FaAws, FaHtml5, FaCss3Alt } from 'react-icons/fa';
+import { SiTailwindcss, SiMongodb, SiExpress, SiJavascript, SiTypescript, SiPostgresql, SiFirebase, SiTensorflow } from 'react-icons/si';
 
 const SKILL_GROUPS = [
   {
     category: 'Frontend',
-    color: '#00f5ff',
+    color: '#3B82F6',
     skills: [
-      { name: 'React',       level: 80 },
-      { name: 'HTML/CSS',    level: 90 },
-      { name: 'JavaScript',  level: 82 },
-      { name: 'Tailwind',    level: 75 },
+      { name: 'React', level: 85, icon: FaReact },
+      { name: 'JavaScript', level: 88, icon: SiJavascript },
+      { name: 'Tailwind CSS', level: 82, icon: SiTailwindcss },
+      { name: 'HTML5', level: 92, icon: FaHtml5 },
+      { name: 'CSS3', level: 90, icon: FaCss3Alt },
     ],
   },
   {
     category: 'Backend',
-    color: '#a855f7',
+    color: '#22D3EE',
     skills: [
-      { name: 'Node.js',     level: 70 },
-      { name: 'Express',     level: 65 },
-      { name: 'Python',      level: 72 },
-      { name: 'REST APIs',   level: 78 },
+      { name: 'Node.js', level: 78, icon: FaNodeJs },
+      { name: 'Express', level: 75, icon: SiExpress },
+      { name: 'Python', level: 80, icon: FaPython },
+      { name: 'REST APIs', level: 82, icon: null },
     ],
   },
   {
-    category: 'Database',
-    color: '#10b981',
+    category: 'Database & Cloud',
+    color: '#10B981',
     skills: [
-      { name: 'MongoDB',     level: 68 },
-      { name: 'MySQL',       level: 72 },
-      { name: 'Firebase',    level: 60 },
+      { name: 'MongoDB', level: 75, icon: SiMongodb },
+      { name: 'PostgreSQL', level: 68, icon: SiPostgresql },
+      { name: 'Firebase', level: 65, icon: SiFirebase },
     ],
   },
   {
-    category: 'Tools & DevOps',
-    color: '#f59e0b',
+    category: 'AI / ML & Tools',
+    color: '#6366F1',
     skills: [
-      { name: 'Git / GitHub', level: 85 },
-      { name: 'VS Code',      level: 90 },
-      { name: 'Docker',       level: 45 },
-      { name: 'Linux',        level: 60 },
+      { name: 'TensorFlow', level: 60, icon: SiTensorflow },
+      { name: 'Git', level: 88, icon: FaGitAlt },
+      { name: 'Docker', level: 50, icon: FaDocker },
+      { name: 'TypeScript', level: 70, icon: SiTypescript },
     ],
   },
-]
+];
+
+function ProgressRing({ level, color, size = 80, strokeWidth = 6 }) {
+  const radius = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (level / 100) * circumference;
+
+  return (
+    <svg width={size} height={size} className="transform -rotate-90">
+      <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth={strokeWidth} />
+      <motion.circle
+        cx={size / 2}
+        cy={size / 2}
+        r={radius}
+        fill="none"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        strokeDasharray={circumference}
+        initial={{ strokeDashoffset: circumference }}
+        animate={{ strokeDashoffset: offset }}
+        transition={{ duration: 1.5, ease: 'easeOut', delay: 0.3 }}
+        style={{ filter: `drop-shadow(0 0 6px ${color}60)` }}
+      />
+    </svg>
+  );
+}
 
 export default function Skills() {
   return (
     <motion.div
-      className="max-w-7xl mx-auto"
+      className="section-container"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
@@ -57,95 +86,77 @@ export default function Skills() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+        <h1 className="text-5xl md:text-6xl font-orbitron font-bold mb-4 bg-gradient-to-r from-hud-accent to-hud-hover bg-clip-text text-transparent">
           Skills & Expertise
         </h1>
-        <p className="text-gray-400 text-lg">Technologies I work with</p>
-        <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto rounded-full mt-4"></div>
+        <p className="text-gray-500 font-rajdhani text-lg tracking-wider">Technologies I work with</p>
+        <div className="w-24 h-1 bg-gradient-to-r from-hud-accent to-hud-hover mx-auto rounded-full mt-4" />
       </motion.div>
 
-      <div className="grid md:grid-cols-2 gap-8">
-        {SKILL_GROUPS.map((group, groupIdx) => (
+      {/* Skill groups */}
+      <div className="grid md:grid-cols-2 gap-8 mb-16">
+        {SKILL_GROUPS.map((group, gi) => (
           <motion.div
             key={group.category}
-            className="bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-2xl p-8"
+            className="glass rounded-2xl p-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 + groupIdx * 0.1 }}
-            whileHover={{ y: -5 }}
+            transition={{ delay: 0.3 + gi * 0.1 }}
+            whileHover={{ y: -4, boxShadow: `0 0 30px ${group.color}10` }}
           >
-            <h3 className="text-2xl font-bold mb-6" style={{ color: group.color }}>
+            <h3 className="text-xl font-orbitron font-bold mb-8" style={{ color: group.color }}>
               {group.category}
             </h3>
-            
-            <div className="space-y-5">
-              {group.skills.map((skill, skillIdx) => (
-                <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4 + groupIdx * 0.1 + skillIdx * 0.05 }}
-                >
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-gray-300 font-medium">{skill.name}</span>
-                    <span className="text-sm font-bold" style={{ color: group.color }}>
-                      {skill.level}%
-                    </span>
-                  </div>
-                  
-                  <div className="relative h-2 bg-slate-700/50 rounded-full overflow-hidden">
-                    <motion.div
-                      className="absolute top-0 left-0 h-full rounded-full"
-                      style={{ backgroundColor: group.color }}
-                      initial={{ width: 0 }}
-                      animate={{ width: `${skill.level}%` }}
-                      transition={{ 
-                        delay: 0.5 + groupIdx * 0.1 + skillIdx * 0.05,
-                        duration: 1,
-                        ease: "easeOut"
-                      }}
-                    >
-                      {/* Glow effect */}
-                      <motion.div
-                        className="absolute inset-0 blur-sm"
-                        style={{ backgroundColor: group.color }}
-                        animate={{
-                          opacity: [0.5, 0.8, 0.5],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                        }}
-                      />
-                    </motion.div>
-                  </div>
-                </motion.div>
-              ))}
+
+            <div className="flex flex-wrap gap-6 justify-center">
+              {group.skills.map((skill, si) => {
+                const Icon = skill.icon;
+                return (
+                  <motion.div
+                    key={skill.name}
+                    className="flex flex-col items-center gap-2 group cursor-default"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.5 + gi * 0.1 + si * 0.06 }}
+                    whileHover={{ scale: 1.1 }}
+                  >
+                    <div className="relative">
+                      <ProgressRing level={skill.level} color={group.color} />
+                      <div className="absolute inset-0 flex flex-col items-center justify-center">
+                        {Icon ? (
+                          <Icon className="text-lg mb-0.5" style={{ color: group.color }} />
+                        ) : (
+                          <span className="text-xs font-bold" style={{ color: group.color }}>API</span>
+                        )}
+                        <span className="text-[10px] font-orbitron font-bold text-gray-400">{skill.level}%</span>
+                      </div>
+                    </div>
+                    <span className="text-xs text-gray-400 font-medium text-center">{skill.name}</span>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
         ))}
       </div>
 
-      {/* Additional Skills Cloud */}
+      {/* Additional skills cloud */}
       <motion.div
-        className="mt-16 bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-2xl p-8"
+        className="glass rounded-2xl p-8"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8 }}
       >
-        <h3 className="text-2xl font-bold text-white mb-6 text-center">
-          Other Technologies
-        </h3>
-        <div className="flex flex-wrap justify-center gap-4">
-          {['TypeScript', 'Next.js', 'Redux', 'GraphQL', 'PostgreSQL', 'Redis', 'AWS', 
-            'CI/CD', 'Jest', 'Webpack', 'Sass', 'Material-UI'].map((tech, i) => (
+        <h3 className="text-xl font-orbitron font-bold text-hud-text mb-6 text-center">Other Technologies</h3>
+        <div className="flex flex-wrap justify-center gap-3">
+          {['Next.js', 'Redux', 'GraphQL', 'Redis', 'AWS', 'CI/CD', 'Jest', 'Webpack', 'Sass', 'Material-UI', 'Prisma', 'Socket.io'].map((tech, i) => (
             <motion.span
               key={tech}
-              className="px-4 py-2 bg-slate-700/50 text-gray-300 rounded-full border border-slate-600 hover:border-neon-blue hover:text-neon-blue transition-all cursor-default"
+              className="px-4 py-2 glass rounded-full text-sm text-gray-400 hover:text-hud-accent hover:border-hud-accent/40 transition-all cursor-default"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.9 + i * 0.03 }}
-              whileHover={{ scale: 1.1, y: -5 }}
+              whileHover={{ scale: 1.08, y: -3 }}
             >
               {tech}
             </motion.span>
@@ -153,5 +164,5 @@ export default function Skills() {
         </div>
       </motion.div>
     </motion.div>
-  )
+  );
 }
