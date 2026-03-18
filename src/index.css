@@ -1,16 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: rgba(25, 25, 25, 0.6);
-  --text-primary: #ffffff;
-  --text-secondary: #a0a0a0;
-  --accent: #6b21a8; /* Deep Purple */
-  --accent-glow: rgba(107, 33, 168, 0.5);
-  --accent-light: #9333ea;
-  --border-color: rgba(255, 255, 255, 0.1);
-  --glass-bg: rgba(20, 20, 20, 0.4);
-  --glass-border: rgba(255, 255, 255, 0.05);
+  --bg-primary: #020617; /* Deep Slate Blue */
+  --bg-secondary: rgba(15, 23, 42, 0.6);
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --accent: #0ea5e9; /* Cyan / Sky Blue */
+  --accent-glow: rgba(14, 165, 233, 0.5);
+  --accent-light: #38bdf8;
+  --accent-secondary: #8b5cf6; /* Neon Violet */
+  --border-color: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(15, 23, 42, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.1);
 }
 
 * {
@@ -27,9 +28,9 @@ body {
   overflow: hidden; 
   height: 100vh;
   width: 100vw;
-  /* Add a subtle radial gradient for premium feel */
-  background-image: radial-gradient(circle at 15% 50%, rgba(107, 33, 168, 0.15) 0%, transparent 50%),
-                    radial-gradient(circle at 85% 30%, rgba(120, 10, 168, 0.1) 0%, transparent 50%);
+  /* Premium Aurora Gradient Background */
+  background-image: radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.15) 0%, transparent 40%),
+                    radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 40%);
 }
 
 #root {

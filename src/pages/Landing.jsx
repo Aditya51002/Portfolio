@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import WheelDial from '../components/WheelDial';
+import SystemShowcase from '../components/SystemShowcase';
+import CommandCenter from '../components/CommandCenter';
 
 const Landing = () => {
   const [showWheel, setShowWheel] = useState(false);
@@ -10,275 +12,423 @@ const Landing = () => {
   useEffect(() => {
     if (location.state?.showWheel) {
       setShowWheel(true);
-      // Clean up the window history state so the wheel doesn't pop up again if the user simply refreshes the page
       window.history.replaceState({}, document.title);
     }
   }, [location.state]);
 
+  // Framer motion variants for orchestration
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2, // cascades animations nicely
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
+  };
+
   return (
-    <div className="landing-page">
-      <div className="landing-content">
+    <div className="landing-scroll-container">
+      <div className="landing-page-aurora">
         
-        {/* Left Section: Intro and Photo */}
-        <div className="left-section">
-          
-          <motion.div 
-            className="intro-block"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <motion.h3 
-              className="greeting"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-            >
-              Hello, I am
-            </motion.h3>
-            <motion.h1 
-              className="name"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-            >
-              Aditya Maurya
-            </motion.h1>
-            <motion.h2 
-              className="role"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-            >
-              MERN Stack <span className="dot">•</span> Web <span className="dot">•</span> Android <span className="dot">•</span> SDET
-            </motion.h2>
-            <motion.p 
-              className="description"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-            >
-              Software Engineer dedicated to architecting robust, scalable, and high-performance applications. Leveraging deep expertise across full-stack modern web technologies, mobile development, and rigorous software testing, I build resilient systems designed to deliver exceptional user experiences and drive impact at enterprise scale.
-            </motion.p>
-            <motion.button 
-              className="explore-btn" 
-              onClick={() => setShowWheel(true)}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ delay: 1.0, duration: 0.4 }}
-            >
-              Explore <span className="arrow">→</span>
-            </motion.button>
-          </motion.div>
+        {/* Animated Background Orbs */}
+        <div className="orb orb-1"></div>
+        <div className="orb orb-2"></div>
+        <div className="orb orb-3"></div>
 
+        <div className="landing-content">
           <motion.div 
-            className="photo-container glass"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5, duration: 0.8, type: "spring", stiffness: 100 }}
+            className="hero-glass-card"
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
           >
-            <div className="photo-placeholder">
-              <img src="/portrait-placeholder.png" alt="Aditya Maurya" className="profile-img" />
+            {/* Split layout inside the massive glass card */}
+            <div className="hero-text-side">
+              <motion.div variants={itemVariants} className="hero-badge">
+                <span className="live-dot"></span> Available for Web & Android
+              </motion.div>
+              
+              <motion.h1 variants={itemVariants} className="hero-title">
+                Hi, I'm <br />
+                <span className="gradient-text">Aditya Maurya</span>
+              </motion.h1>
+
+              <motion.h2 variants={itemVariants} className="hero-subtitle">
+                MERN Stack <span className="separator">•</span> SDET <span className="separator">•</span> Innovator
+              </motion.h2>
+
+              <motion.p variants={itemVariants} className="hero-description">
+                I architect highly scalable web applications, robust mobile platforms, and automated test frameworks. Obsessed with clean code and unparalleled user experiences. Let's build something extraordinary.
+              </motion.p>
+
+              <motion.div variants={itemVariants}>
+                <CommandCenter />
+              </motion.div>
+
+              <motion.div variants={itemVariants} className="hero-actions">
+                <button 
+                  className="interactive-explore-btn" 
+                  onClick={() => setShowWheel(true)}
+                >
+                  <span className="btn-bg"></span>
+                  <span className="btn-text">Explore Portfolio <span className="arrow">→</span></span>
+                </button>
+              </motion.div>
             </div>
-            {/* Decorative corner accents */}
-            <div className="corner top-left"></div>
-            <div className="corner bottom-right"></div>
-          </motion.div>
 
+            <div className="hero-image-side">
+              <motion.div 
+                className="profile-hologram"
+                variants={itemVariants}
+                whileHover={{ scale: 1.05, rotateY: 10 }}
+              >
+                <div className="hologram-ring back"></div>
+                <div className="hologram-ring front"></div>
+                <img src="/portrait-placeholder.png" alt="Aditya Maurya" className="hero-profile-img" />
+              </motion.div>
+            </div>
+
+          </motion.div>
         </div>
 
-        {/* Right Section: Wheel Dial is now an Overlay */}
+        {/* Wheel Overlay */}
         {showWheel && (
-          <div className="wheel-overlay" onClick={() => setShowWheel(false)}>
+          <motion.div 
+            className="wheel-overlay-aurora" 
+            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowWheel(false)}
+          >
             <div className="wheel-wrapper" onClick={(e) => e.stopPropagation()}>
               <WheelDial onClose={() => setShowWheel(false)} />
               <button className="close-wheel-btn" onClick={() => setShowWheel(false)}>×</button>
             </div>
-          </div>
+          </motion.div>
         )}
-
       </div>
 
+      {/* High-end technical showcase targeting FAANG recruiters */}
+      <SystemShowcase />
+
       <style>{`
-        .landing-page {
+        .landing-scroll-container {
           width: 100%;
-          height: calc(100vh - 80px); /* Minus navbar */
+          height: 100%;
+          overflow-y: auto;
+          overflow-x: hidden;
+          scroll-behavior: smooth;
+        }
+
+        .landing-scroll-container::-webkit-scrollbar {
+          width: 8px;
+        }
+        .landing-scroll-container::-webkit-scrollbar-track {
+          background: rgba(0, 0, 0, 0.1);
+        }
+        .landing-scroll-container::-webkit-scrollbar-thumb {
+          background: var(--accent);
+          border-radius: 4px;
+        }
+
+        .landing-page-aurora {
+          width: 100%;
+          min-height: calc(100vh - 80px); /* Fill screen under navbar */
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 0 40px;
+          position: relative;
+          padding: 2rem;
+          overflow: hidden; /* Contains background orbs to hero section */
         }
 
+        /* --- Dynamic Aurora Background Orbs --- */
+        .orb {
+          position: absolute;
+          border-radius: 50%;
+          filter: blur(80px);
+          opacity: 0.6;
+          z-index: 0;
+          animation: floatOrb 15s ease-in-out infinite alternate;
+          pointer-events: none;
+        }
+        .orb-1 {
+          background: var(--accent);
+          width: 500px;
+          height: 500px;
+          top: -100px;
+          left: -100px;
+          animation-delay: 0s;
+        }
+        .orb-2 {
+          background: var(--accent-secondary);
+          width: 400px;
+          height: 400px;
+          bottom: -50px;
+          right: -50px;
+          animation-delay: -5s;
+        }
+        .orb-3 {
+          background: var(--accent-light);
+          width: 300px;
+          height: 300px;
+          top: 40%;
+          left: 50%;
+          animation: pulseOrb 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatOrb {
+          0% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-50px) scale(1.1); }
+          100% { transform: translateY(30px) scale(0.9); }
+        }
+        @keyframes pulseOrb {
+          0% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+          100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.6; }
+        }
+
+        /* --- Hero Content --- */
         .landing-content {
           width: 100%;
-          max-width: 1400px;
+          max-width: 1300px;
+          z-index: 10;
+        }
+
+        .hero-glass-card {
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border-radius: 30px;
+          padding: 60px;
           display: flex;
           align-items: center;
-          justify-content: space-between;
           gap: 60px;
+          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          transform-style: preserve-3d;
+          perspective: 1000px;
         }
 
-        .left-section {
-          flex: 1;
-          display: flex;
-          align-items: center;
-          gap: 40px;
-        }
-
-        .intro-block {
-          flex: 1;
+        .hero-text-side {
+          flex: 1.2;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          animation: slideUp 1s ease forwards;
+          gap: 20px;
         }
 
-        .greeting {
-          font-size: 1.2rem;
+        .hero-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(14, 165, 233, 0.1);
+          border: 1px solid rgba(14, 165, 233, 0.3);
+          padding: 8px 16px;
+          border-radius: 30px;
+          font-size: 0.9rem;
           color: var(--accent-light);
-          text-transform: uppercase;
-          letter-spacing: 2px;
-          margin-bottom: 10px;
           font-weight: 500;
+          letter-spacing: 0.5px;
         }
 
-        .name {
-          font-size: 4rem;
-          font-weight: 700;
+        .live-dot {
+          width: 8px;
+          height: 8px;
+          background: var(--accent-light);
+          border-radius: 50%;
+          box-shadow: 0 0 10px var(--accent-light);
+          animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        .hero-title {
+          font-size: 4.5rem;
+          font-weight: 800;
           line-height: 1.1;
-          margin-bottom: 5px;
-          background: linear-gradient(to right, #fff, var(--accent-light));
+          color: #fff;
+          margin: 0;
+        }
+
+        .gradient-text {
+          background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent-secondary) 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
+          filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.3));
         }
 
-        .role {
-          font-size: 1.8rem;
-          font-weight: 300;
+        .hero-subtitle {
+          font-size: 1.5rem;
           color: var(--text-secondary);
-          margin-bottom: 20px;
+          font-weight: 400;
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: 15px;
           flex-wrap: wrap;
         }
 
-        .dot {
+        .separator {
           color: var(--accent);
-          font-size: 1.2rem;
         }
 
-        .description {
-          font-size: 1.1rem;
-          line-height: 1.6;
-          color: #cccccc;
-          margin-bottom: 40px;
+        .hero-description {
+          font-size: 1.15rem;
+          line-height: 1.7;
+          color: #94a3b8;
           max-width: 90%;
+          font-weight: 300;
         }
 
-        .explore-btn {
-          padding: 15px 35px;
-          font-size: 1.1rem;
-          font-family: inherit;
-          font-weight: 600;
-          color: #fff;
-          background: transparent;
-          border: 1px solid var(--accent-light);
-          border-radius: 30px;
-          cursor: pointer;
-          transition: all 0.3s ease;
+        .hero-actions {
+          margin-top: 15px;
+        }
+
+        /* --- Interactive Explore Button --- */
+        .interactive-explore-btn {
           position: relative;
+          background: transparent;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+          outline: none;
+          border-radius: 50px;
           overflow: hidden;
+        }
+
+        .btn-bg {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(45deg, var(--accent), var(--accent-secondary), var(--accent));
+          background-size: 200% auto;
+          animation: gradientShift 3s linear infinite;
+          border-radius: 50px;
+          transition: 0.5s;
+        }
+
+        .interactive-explore-btn:hover .btn-bg {
+          box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .btn-text {
+          position: relative;
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 12px;
+          background: var(--bg-primary); /* cuts out interior so edge is gradient */
+          margin: 2px; /* width of outline */
+          padding: 16px 36px;
+          border-radius: 48px;
+          color: #fff;
+          font-size: 1.1rem;
+          font-weight: 600;
+          transition: 0.3s;
+          z-index: 1;
         }
 
-        .explore-btn:hover {
-          background: var(--accent-light);
-          box-shadow: 0 0 20px var(--accent-glow);
-          transform: translateY(-2px);
+        .interactive-explore-btn:hover .btn-text {
+          background: transparent;
+          color: #fff;
         }
 
-        .explore-btn .arrow {
-          transition: transform 0.3s ease;
+        .interactive-explore-btn .arrow {
+          transition: transform 0.3s;
         }
 
-        .explore-btn:hover .arrow {
+        .interactive-explore-btn:hover .arrow {
           transform: translateX(5px);
         }
 
-        /* Photo Rectangular Container */
-        .photo-container {
+        @keyframes gradientShift {
+          0% { background-position: 0% center; }
+          100% { background-position: 200% center; }
+        }
+
+        /* --- Portrait & Image Side --- */
+        .hero-image-side {
           flex: 0.8;
-          height: 480px;
-          border-radius: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+        }
+
+        .profile-hologram {
+          width: 380px;
+          height: 380px;
           position: relative;
           display: flex;
           justify-content: center;
           align-items: center;
-          padding: 12px;
+          border-radius: 30px;
+          transform-style: preserve-3d;
         }
 
-        .photo-placeholder {
-          width: 100%;
-          height: 100%;
-          border-radius: 12px;
-          overflow: hidden;
-          background: var(--bg-primary);
-        }
-
-        .profile-img {
-          width: 100%;
-          height: 100%;
+        .hero-profile-img {
+          width: 85%;
+          height: 85%;
           object-fit: cover;
-          transition: transform 0.5s ease;
+          border-radius: 30px;
+          z-index: 2;
+          box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+          filter: contrast(1.1) brightness(0.9);
+          transition: 0.5s;
         }
 
-        .photo-container:hover .profile-img {
-          transform: scale(1.03);
+        .profile-hologram:hover .hero-profile-img {
+          transform: translateZ(30px);
+          filter: contrast(1.1) brightness(1);
         }
 
-        .corner {
+        .hologram-ring {
           position: absolute;
-          width: 40px;
-          height: 40px;
-          border: 2px solid var(--accent-light);
+          inset: 0;
+          border: 2px solid var(--accent);
+          border-radius: 35px;
+          transition: 0.5s;
         }
 
-        .top-left {
-          top: -10px;
-          left: -10px;
-          border-right: none;
-          border-bottom: none;
-          border-top-left-radius: 10px;
+        .hologram-ring.back {
+          transform: translateZ(-20px) rotate(-5deg);
+          border-color: var(--accent-secondary);
+          opacity: 0.5;
         }
 
-        .bottom-right {
-          bottom: -10px;
-          right: -10px;
-          border-left: none;
-          border-top: none;
-          border-bottom-right-radius: 10px;
+        .hologram-ring.front {
+          transform: translateZ(20px) rotate(5deg);
+          border-color: var(--accent-light);
+          opacity: 0.8;
         }
 
-        /* Wheel Overlay Styles */
-        .wheel-overlay {
+        .profile-hologram:hover .hologram-ring.back {
+          transform: translateZ(-30px) rotate(-10deg) scale(1.05);
+        }
+
+        .profile-hologram:hover .hologram-ring.front {
+          transform: translateZ(30px) rotate(10deg) scale(1.05);
+        }
+
+        /* --- Wheel Overlay --- */
+        .wheel-overlay-aurora {
           position: fixed;
           top: 0;
           left: 0;
           width: 100vw;
           height: 100vh;
-          background: rgba(10, 10, 10, 0.5); /* Semi-transparent dark background */
-          backdrop-filter: blur(15px); /* Strong blur effect */
-          -webkit-backdrop-filter: blur(15px);
+          background: rgba(2, 6, 23, 0.7);
           display: flex;
           justify-content: center;
           align-items: center;
           z-index: 1000;
-          animation: fadeIn 0.4s ease forwards;
         }
 
         .wheel-wrapper {
@@ -308,23 +458,46 @@ const Landing = () => {
         }
 
         .close-wheel-btn:hover {
-          background: rgba(255, 255, 255, 0.2);
-          transform: scale(1.1);
+          background: var(--accent-secondary);
+          border-color: var(--accent-light);
+          transform: scale(1.1) rotate(90deg);
         }
 
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-
-        /* Responsive adjustments for unscrollable compact views */
+        /* Responsive Design */
         @media (max-width: 1200px) {
-          .landing-content {
-            gap: 20px;
+          .hero-glass-card {
+            flex-direction: column;
+            padding: 40px;
+            text-align: center;
+            gap: 40px;
           }
-          .name { font-size: 3rem; }
-          .role { font-size: 1.5rem; }
-          .photo-container { display: none; /* Hide photo on smaller screens to prioritize wheel */ }
+          .hero-text-side {
+            align-items: center;
+          }
+          .hero-title {
+            font-size: 3.5rem;
+          }
+          .hero-description {
+            max-width: 100%;
+          }
+          .orb-1, .orb-2 {
+            width: 300px;
+            height: 300px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .hero-title {
+            font-size: 2.8rem;
+          }
+          .hero-subtitle {
+            font-size: 1.2rem;
+            justify-content: center;
+          }
+          .profile-hologram {
+            width: 280px;
+            height: 280px;
+          }
         }
       `}</style>
     </div>
