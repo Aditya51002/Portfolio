@@ -1,88 +1,120 @@
-const About = () => {
+import React from 'react';
+import { motion } from 'framer-motion';
+
+const AboutSection = () => {
   return (
-    <div className="page-container glass">
-      <h2 className="page-title">About Me</h2>
-      <div className="about-grid">
-        {/* Card 1: Who you are (Large Block) */}
-        <div className="about-card bento-large">
-          <div className="card-header">
-            <h3>Who I Am</h3>
+    <section id="about" className="about-section glass">
+      <div className="section-container">
+        <h2 className="section-title">About <span className="highlight">Me</span></h2>
+        <div className="about-grid">
+          {/* Card 1: Who you are (Large Block) */}
+          <div className="about-card bento-large">
+            <div className="card-header">
+              <h3>Who I Am</h3>
+            </div>
+            <div className="card-body">
+              <p className="highlight-text">
+                Hello! I'm <strong className="gradient-text">Aditya Maurya</strong>, a highly motivated Computer Science student and Developer based in India.
+              </p>
+              <p>
+                I have a profound passion for solving complex algorithmic problems, exploring system design architectures, and building scalable web applications. My goal is to craft digital experiences that are not only functional but also visually stunning.
+              </p>
+            </div>
           </div>
-          <div className="card-body">
-            <p className="highlight-text">
-              Hello! I'm <strong className="gradient-text">Aditya Maurya</strong>, a highly motivated Computer Science student and Developer based in India.
-            </p>
-            <p>
-              I have a profound passion for solving complex algorithmic problems, exploring system design architectures, and building scalable web applications. My goal is to craft digital experiences that are not only functional but also visually stunning.
-            </p>
-          </div>
-        </div>
 
-        {/* Card 2: What you do (Wide Block) */}
-        <div className="about-card bento-wide">
-          <div className="card-header">
-            <h3>What I Do</h3>
+          {/* Card 2: What you do (Wide Block) */}
+          <div className="about-card bento-wide">
+            <div className="card-header">
+              <h3>What I Do</h3>
+            </div>
+            <div className="card-body">
+              <p>
+                I specialize in full-stack development using <strong>MongoDB, Express.js, React, and Node.js</strong>.
+              </p>
+              <p>
+                My primary focus is writing clean, accessible code, designing modern user-friendly interfaces, and leveraging cutting-edge web technologies to deliver impactful products.
+              </p>
+            </div>
           </div>
-          <div className="card-body">
-            <p>
-              I specialize in full-stack development using <strong>MongoDB, Express.js, React, and Node.js</strong>.
-            </p>
-            <p>
-              My primary focus is writing clean, accessible code, designing modern user-friendly interfaces, and leveraging cutting-edge web technologies to deliver impactful products.
-            </p>
-          </div>
-        </div>
 
-        {/* Card 3: Education (Small Block) */}
-        <div className="about-card bento-small glass-highlight">
-          <div className="card-header">
-            <h3>Education</h3>
+          {/* Card 3: Education (Small Block) */}
+          <div className="about-card bento-small glass-highlight">
+            <div className="card-header">
+              <h3>Education</h3>
+            </div>
+            <div className="card-body">
+              <p>
+                <strong>B.Tech in CSE</strong><br />
+                Lovely Professional University<br />
+                <span className="text-secondary" style={{fontSize: '0.9rem'}}>Currently Pursuing</span>
+              </p>
+            </div>
           </div>
-          <div className="card-body">
-            <p>
-              <strong>B.Tech in CSE</strong><br />
-              Lovely Professional University<br />
-              <span className="text-secondary" style={{fontSize: '0.9rem'}}>Currently Pursuing</span>
-            </p>
-          </div>
-        </div>
 
-        {/* Card 4: Location (Small Block) */}
-        <div className="about-card bento-small glass-highlight">
-          <div className="card-header">
-            <h3>Location</h3>
+          {/* Card 4: Location (Small Block) */}
+          <div className="about-card bento-small glass-highlight">
+            <div className="card-header">
+              <h3>Location</h3>
+            </div>
+            <div className="card-body">
+              <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '1.2rem' }}>
+                📍 India
+              </p>
+              <p className="text-secondary" style={{fontSize: '0.9rem'}}>
+                Open to Remote & Relocation
+              </p>
+            </div>
           </div>
-          <div className="card-body">
-            <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '1.2rem' }}>
-              📍 India
-            </p>
-            <p className="text-secondary" style={{fontSize: '0.9rem'}}>
-              Open to Remote & Relocation
-            </p>
-          </div>
-        </div>
 
-        {/* Card 5: Looking For (Wide Block) */}
-        <div className="about-card bento-wide-bottom">
-          <div className="card-header">
-            <h3>Looking For</h3>
-          </div>
-          <div className="card-body" style={{ flexDirection: 'row', alignItems: 'center', gap: '30px' }}>
-            <p style={{ flex: 1 }}>
-              Actively seeking <strong>Software Engineering</strong> and <strong>Full-Stack Development</strong> opportunities where I can contribute to challenging projects in collaborative environments that push the boundaries of technology.
-            </p>
-            <div className="availability-badge">Available Now</div>
+          {/* Card 5: Looking For (Wide Block) */}
+          <div className="about-card bento-wide-bottom">
+            <div className="card-header">
+              <h3>Looking For</h3>
+            </div>
+            <div className="card-body" style={{ flexDirection: 'row', alignItems: 'center', gap: '30px' }}>
+              <p style={{ flex: 1 }}>
+                Actively seeking <strong>Software Engineering</strong> and <strong>Full-Stack Development</strong> opportunities where I can contribute to challenging projects in collaborative environments that push the boundaries of technology.
+              </p>
+              <div className="availability-badge">Available Now</div>
+            </div>
           </div>
         </div>
       </div>
 
       <style>{`
+        .about-section {
+          width: 100%;
+          padding: 100px 40px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .section-container {
+          width: 100%;
+          max-width: 1300px;
+          z-index: 10;
+        }
+
+        .section-title {
+          font-size: 3.5rem;
+          font-weight: 800;
+          color: #fff;
+          margin-bottom: 50px;
+          text-align: center;
+        }
+
+        .section-title .highlight {
+          color: var(--accent-light);
+        }
+
         .about-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           grid-auto-rows: minmax(150px, auto);
           gap: 20px;
-          margin-top: 20px;
           width: 100%;
         }
 
@@ -236,9 +268,11 @@ const About = () => {
             grid-row: auto;
           }
           .card-body { flex-direction: column !important; align-items: flex-start !important; }
+          .section-title { font-size: 2.5rem; }
         }
       `}</style>
-    </div>
+    </section>
   );
 };
-export default About;
+
+export default AboutSection;

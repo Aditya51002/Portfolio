@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import WheelDial from '../components/WheelDial';
 import SystemShowcase from '../components/SystemShowcase';
 import CommandCenter from '../components/CommandCenter';
+import AboutSection from '../components/AboutSection';
 
 const Landing = () => {
   const [showWheel, setShowWheel] = useState(false);
@@ -114,6 +115,9 @@ const Landing = () => {
           </motion.div>
         )}
       </div>
+
+      {/* About Section extracted from About page */}
+      <AboutSection />
 
       {/* High-end technical showcase targeting FAANG recruiters */}
       <SystemShowcase />

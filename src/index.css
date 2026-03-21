@@ -57,9 +57,23 @@ ul {
   border: 1px solid var(--glass-border);
 }
 
-/* Scrollbar hiding for fallback */
+/* Scrollbar hiding for fallback and general cleanup */
 ::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
 }
 
 /* Common Page Styles */
@@ -68,11 +82,12 @@ ul {
   border-radius: 20px;
   width: 90%;
   max-width: 1000px;
-  max-height: 80vh;
+  max-height: 85vh;
   margin: 0 auto;
   color: #fff;
   animation: slideUpFade 0.6s ease forwards;
   overflow-y: auto;
+  overflow-x: hidden; /* CRITICAL: Prevent horizontal wobble */
 }
 
 .page-title {

@@ -300,18 +300,19 @@ const Projects = () => {
 
         .modal-content {
           width: 100%;
-          max-width: 700px;
+          max-width: 800px; /* Slightly wider for better text flow */
           max-height: 90vh;
           overflow-y: auto;
-          background: rgba(20, 20, 20, 0.85); /* Slightly darker glass for modal */
+          overflow-x: hidden; /* Prevent horizontal scroll inside modal */
+          background: rgba(10, 15, 25, 0.9); /* More solid for readability */
           border: 1px solid var(--accent-glow);
-          border-radius: 24px;
-          padding: 40px;
+          border-radius: 28px;
+          padding: 50px;
           position: relative;
-          box-shadow: 0 20px 60px rgba(0,0,0, 0.6), 0 0 30px rgba(107, 33, 168, 0.2);
+          box-shadow: 0 30px 70px rgba(0,0,0, 0.8), 0 0 40px rgba(14, 165, 233, 0.1);
         }
 
-        /* Custom scrollbar for modal content */
+        /* Custom scrollbar for modal content - match global style */
         .modal-content::-webkit-scrollbar {
           width: 6px;
         }
@@ -319,8 +320,11 @@ const Projects = () => {
           background: transparent;
         }
         .modal-content::-webkit-scrollbar-thumb {
-          background: var(--accent);
-          border-radius: 3px;
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 10px;
+        }
+        .modal-content::-webkit-scrollbar-thumb:hover {
+          background: var(--accent-light);
         }
 
         .close-modal-btn {
