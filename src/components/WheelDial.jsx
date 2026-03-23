@@ -48,128 +48,135 @@ const WheelDial = ({ onClose }) => {
   const size = 500;
   const center = size / 2;
   const outerRadius = 240;
-  const innerRadius = 120;
+  const innerRadius = 110;
   const numSegments = SECTIONS.length;
   const anglePerSegment = 360 / numSegments;
 
-  // The first segment starts at the top-right. We adjust the starting angle so that
-  // the sections align well. Let's start from 0 degrees (top).
   return (
-    <div className="wheel-container">
+    <div className="wheel-container-comic">
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+        <defs>
+          <pattern id="halftone-wheel" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="1.5" fill="rgba(0,0,0,0.1)" />
+          </pattern>
+        </defs>
+        
         {SECTIONS.map((section, index) => {
           const startAngle = index * anglePerSegment;
           const endAngle = startAngle + anglePerSegment;
-          
-          // Gap of 2 degrees between segments for visual separation
-          const gap = 2;
+          const gap = 3;
           const pathD = describeArc(center, center, innerRadius, outerRadius, startAngle + gap, endAngle - gap);
           
-          // Calculate center of the arc for text placement
           const midAngle = startAngle + (anglePerSegment / 2);
-          const textRadius = innerRadius + (outerRadius - innerRadius) / 2;
-          const textPos = polarToCartesian(center, center, textRadius, midAngle);
+          const textRadius = innerRadius + (outerRadius - innerRadius) / 0.8; // Adjusted for better fit
+          const textPos = polarToCartesian(center, center, (innerRadius + outerRadius) / 2, midAngle);
           
           const isHovered = hoveredIndex === index;
 
           return (
             <g 
               key={section.name} 
-              className={`wheel-segment ${isHovered ? 'hovered' : ''}`}
+              className={`wheel-segment-comic ${isHovered ? 'hovered' : ''}`}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
               onClick={() => {
                 navigate(section.path);
                 if (onClose) onClose();
               }}
-              style={{ cursor: 'pointer', transition: 'all 0.3s ease' }}
             >
               <path 
                 d={pathD} 
-                fill={isHovered ? "var(--accent-glow)" : "var(--glass-bg)"}
-                stroke={isHovered ? "var(--accent-light)" : "var(--border-color)"}
-                strokeWidth={isHovered ? "2" : "1"}
-                style={{ transition: 'all 0.3s ease' }}
+                fill={isHovered ? "var(--accent)" : "url(#halftone-wheel)"}
+                stroke="#000"
+                strokeWidth="4"
+                className="segment-path"
               />
               <text 
                 x={textPos.x} 
                 y={textPos.y} 
                 textAnchor="middle" 
                 alignmentBaseline="middle"
-                fill={isHovered ? "#fff" : "var(--text-secondary)"}
-                fontSize="14"
-                fontWeight={isHovered ? "600" : "400"}
-                style={{ transition: 'all 0.3s ease', pointerEvents: 'none', userSelect: 'none' }}
+                fill={isHovered ? "#fff" : "#000"}
+                className="segment-text-comic"
+                transform={`rotate(${midAngle + 90}, ${textPos.x}, ${textPos.y})`}
               >
-                {section.name}
+                {section.name.toUpperCase()}
               </text>
             </g>
           );
         })}
-        {/* Center decoration / Home Button */}
+
+        {/* Center Panel */}
         <g 
-          className="wheel-center"
+          className="wheel-center-comic"
           onMouseEnter={() => setHoveredCenter(true)}
           onMouseLeave={() => setHoveredCenter(false)}
           onClick={() => {
             navigate('/');
             if (onClose) onClose();
           }}
-          style={{ cursor: 'pointer', transition: 'all 0.3s ease' }}
         >
           <circle 
-            cx={center} 
-            cy={center} 
-            r={innerRadius - 15} 
-            fill={hoveredCenter ? "var(--accent-glow)" : "var(--bg-primary)"} 
-            stroke={hoveredCenter ? "var(--accent-light)" : "var(--border-color)"}
-            strokeWidth={hoveredCenter ? "2" : "1"}
-            style={{ transition: 'all 0.3s ease' }} 
+            cx={center} cy={center} r={innerRadius - 10} 
+            fill="#fff" stroke="#000" strokeWidth="6" 
           />
-          <circle cx={center} cy={center} r={innerRadius - 22} fill="none" stroke="var(--border-color)" strokeWidth="1" strokeDasharray="5,5" />
+          <circle cx={center} cy={center} r={innerRadius - 25} fill="none" stroke="#000" strokeWidth="2" strokeDasharray="8,4" />
           <text 
-            x={center} 
-            y={center} 
-            textAnchor="middle" 
-            alignmentBaseline="middle"
-            fill={hoveredCenter ? "#fff" : "var(--text-secondary)"}
-            fontSize="16"
-            fontWeight={hoveredCenter ? "600" : "500"}
-            style={{ transition: 'all 0.3s ease', pointerEvents: 'none', userSelect: 'none' }}
+            x={center} y={center} 
+            textAnchor="middle" alignmentBaseline="middle"
+            fill="#000"
+            className="center-text-comic"
           >
-            Home
+            HOME
           </text>
         </g>
       </svg>
 
       <style>{`
-        .wheel-container {
+        .wheel-container-comic {
           position: relative;
           display: flex;
           justify-content: center;
           align-items: center;
-          filter: drop-shadow(0 0 20px rgba(107, 33, 168, 0.2));
-          animation: spinIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          animation: popInComic 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        .wheel-segment {
-          transform-origin: center;
+        .wheel-segment-comic {
+          cursor: pointer;
+          transition: transform 0.2s;
         }
 
-        .wheel-segment.hovered {
-          transform: scale(1.05);
-          filter: drop-shadow(0 0 10px var(--accent-glow));
+        .wheel-segment-comic.hovered {
+          transform: scale(1.03);
+          z-index: 10;
         }
 
-        @keyframes spinIn {
-          from {
-            transform: scale(0.8) rotate(-90deg);
-            opacity: 0;
-          }
-          to {
-            transform: scale(1) rotate(0deg);
-            opacity: 1;
-          }
+        .segment-path {
+          transition: fill 0.2s;
+        }
+
+        .segment-text-comic {
+          font-family: 'Bangers', cursive;
+          font-size: 1.2rem;
+          pointer-events: none;
+          letter-spacing: 1px;
+        }
+
+        .center-text-comic {
+          font-family: 'Bangers', cursive;
+          font-size: 2rem;
+          pointer-events: none;
+        }
+
+        .wheel-center-comic:hover {
+          transform: scale(1.1);
+          cursor: pointer;
+        }
+
+        @keyframes popInComic {
+          0% { transform: scale(0); opacity: 0; }
+          80% { transform: scale(1.1); opacity: 1; }
+          100% { transform: scale(1); opacity: 1; }
         }
       `}</style>
     </div>

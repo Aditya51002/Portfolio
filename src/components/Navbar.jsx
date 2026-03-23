@@ -5,31 +5,28 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
-    <nav className="navbar glass">
+    <nav className="navbar-comic">
       <div className="nav-container">
-        <div className="logo">
-          <Link to="/">Aditya<span>.</span></Link>
+        <div className="logo-comic">
+          <Link to="/">ADITYA MAURYA</Link>
         </div>
         
-        <ul className="nav-links">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/projects">Projects</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
-          <li><Link to="/resume">Resume</Link></li>
+        <ul className="nav-links-comic">
+          <li><Link to="/">HOME</Link></li>
+          <li><Link to="/projects">PROJECTS</Link></li>
+          <li><Link to="/contact">CONTACT</Link></li>
           <li 
             className="dropdown-container"
             onMouseEnter={() => setIsDropdownOpen(true)}
             onMouseLeave={() => setIsDropdownOpen(false)}
           >
-            <span className="explore-trigger">Explore ▾</span>
+            <span className="explore-trigger">EXPLORE ▾</span>
             
             {isDropdownOpen && (
-              <ul className="dropdown-menu glass">
-                <li><Link to="/skills" onClick={() => setIsDropdownOpen(false)}>Skills</Link></li>
-                <li><Link to="/education" onClick={() => setIsDropdownOpen(false)}>Education</Link></li>
-                <li><Link to="/experience" onClick={() => setIsDropdownOpen(false)}>Experience</Link></li>
-                <li><Link to="/achievements" onClick={() => setIsDropdownOpen(false)}>Achievements</Link></li>
-                <li><Link to="/learning" onClick={() => setIsDropdownOpen(false)}>Current Focus</Link></li>
+              <ul className="dropdown-menu-comic">
+                <li><Link to="/skills">SKILLS</Link></li>
+                <li><Link to="/education">EDUCATION</Link></li>
+                <li><Link to="/experience">EXPERIENCE</Link></li>
               </ul>
             )}
           </li>
@@ -37,14 +34,16 @@ const Navbar = () => {
       </div>
 
       <style>{`
-        .navbar {
+        .navbar-comic {
           width: 100%;
           height: 80px;
           display: flex;
           align-items: center;
-          position: relative;
+          position: sticky;
+          top: 0;
           z-index: 100;
-          border-bottom: 1px solid var(--border-color);
+          background: #fff;
+          border-bottom: 4px solid #000;
         }
 
         .nav-container {
@@ -57,101 +56,56 @@ const Navbar = () => {
           padding: 0 40px;
         }
 
-        .logo a {
-          font-size: 1.5rem;
-          font-weight: 700;
-          letter-spacing: 1px;
+        .logo-comic a {
+          font-family: 'Bangers', cursive;
+          font-size: 2rem;
+          color: #000;
+          letter-spacing: 2px;
         }
 
-        .logo span {
-          color: var(--accent-light);
-        }
-
-        .nav-links {
+        .nav-links-comic {
           display: flex;
-          gap: 40px;
+          gap: 30px;
+          font-family: 'Bangers', cursive;
         }
 
-        .nav-links a, .explore-trigger {
-          font-size: 1.1rem;
-          font-weight: 500;
-          transition: color 0.3s ease;
-          position: relative;
-          color: #fff;
-          cursor: pointer;
-        }
-
-        .nav-links a:hover, .explore-trigger:hover {
-          color: var(--accent-light);
-        }
-
-        .nav-links a::after, .explore-trigger::after {
-          content: '';
-          position: absolute;
-          width: 0;
-          height: 2px;
-          bottom: -4px;
-          left: 0;
-          background-color: var(--accent-light);
-          transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after, .explore-trigger:hover::after {
-          width: 100%;
-        }
-
-        .dropdown-container {
-          position: relative;
-        }
-
-        .dropdown-menu {
-          position: absolute;
-          top: calc(100% + 20px);
-          right: -20px;
-          width: 200px;
-          background: rgba(15, 15, 20, 0.85); /* Dark solid glass */
-          border: 1px solid var(--border-color);
-          border-radius: 12px;
+        .nav-links-comic a, .explore-trigger {
+          font-size: 1.25rem;
+          color: #000;
+          transition: all 0.2s;
           display: flex;
-          flex-direction: column;
+          align-items: center;
+        }
+
+        .nav-links-comic a:hover, .explore-trigger:hover {
+          color: var(--accent);
+          transform: translateY(-2px);
+        }
+
+        .dropdown-menu-comic {
+          position: absolute;
+          top: 100%;
+          right: 0;
+          background: #fff;
+          border: 3px solid #000;
+          box-shadow: 6px 6px 0 #000;
           padding: 10px 0;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-          animation: slideDown 0.2s ease forwards;
+          min-width: 180px;
         }
 
-        /* Invisible bridge to prevent hover loss over the gap */
-        .dropdown-menu::before {
-          content: '';
-          position: absolute;
-          top: -20px;
-          left: 0;
-          width: 100%;
-          height: 20px;
-        }
-
-        .dropdown-menu li {
+        .dropdown-menu-comic li {
           list-style: none;
         }
 
-        .dropdown-menu a {
-          display: block;
+        .dropdown-menu-comic a {
           padding: 10px 20px;
-          font-size: 1rem;
-          color: #cccccc;
+          display: block;
+          font-size: 1.1rem;
         }
 
-        .dropdown-menu a::after {
-          display: none; /* Hide bottom border on dropdown items */
-        }
-
-        .dropdown-menu a:hover {
-          background: rgba(255,255,255,0.05);
-          color: var(--accent-light);
-        }
-
-        @keyframes slideDown {
-          from { opacity: 0; transform: translateY(-10px); }
-          to { opacity: 1; transform: translateY(0); }
+        .dropdown-menu-comic a:hover {
+          background: #f0f0f0;
+          color: var(--accent);
         }
       `}</style>
     </nav>

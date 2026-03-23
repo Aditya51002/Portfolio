@@ -3,27 +3,25 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const SystemShowcase = () => {
   const [terminalLines, setTerminalLines] = useState([
-    { text: "> Running unit tests: 100% pass", type: "success" },
-    { text: "> Cache hit ratio: 98.4%", type: "system" },
-    { text: "> Analyzing load balancer traffic...", type: "action" }
+    { text: "> RUNNING UNIT TESTS: 100% PASS", type: "success" },
+    { text: "> CACHE HIT RATIO: 98.4%", type: "system" },
+    { text: "> ANALYZING LOAD BALANCER TRAFFIC...", type: "action" }
   ]);
 
-  // Simulator State
   const [load, setLoad] = useState(20);
   const [isCaching, setIsCaching] = useState(false);
   const [isScaling, setIsScaling] = useState(false);
   const [metrics, setMetrics] = useState({ latency: 45, throughput: 1200, cpu: 15 });
 
   useEffect(() => {
-    // Terminal Animation
     const lines = [
-      "> Auto-scaling triggered: +5 instances",
-      "> Garbage collection optimized",
-      "> Heartbeat: Healthy",
-      "> System Architecture: Resilient",
-      "> Running unit tests: 100% pass",
-      "> Cache hit ratio: 98.4%",
-      "> Analyzing load balancer traffic..."
+      "> AUTO-SCALING TRIGGERED: +5 INSTANCES",
+      "> GARBAGE COLLECTION OPTIMIZED",
+      "> HEARTBEAT: HEALTHY",
+      "> SYSTEM ARCHITECTURE: RESILIENT",
+      "> RUNNING UNIT TESTS: 100% PASS",
+      "> CACHE HIT RATIO: 98.4%",
+      "> ANALYZING LOAD BALANCER TRAFFIC..."
     ];
     
     let index = 0;
@@ -37,7 +35,6 @@ const SystemShowcase = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Simulator Logic
   useEffect(() => {
     const baseLatency = 100;
     const loadFactor = load / 10;
@@ -52,33 +49,18 @@ const SystemShowcase = () => {
   }, [load, isCaching, isScaling]);
 
   return (
-    <section className="system-showcase">
-      <div className="showcase-header">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="section-title"
-        >
-          Engineering <span className="highlight">Excellence</span>
-        </motion.h2>
-        <p className="section-subtitle">Architecting high-performance systems with data-driven precision.</p>
+    <section className="system-showcase-comic">
+      <div className="showcase-header-comic">
+        <h2 className="section-title-comic">ENGINEERING <span className="highlight-comic">EXCELLENCE</span></h2>
+        <p className="section-subtitle-comic">ARCHITECTING HIGH-PERFORMANCE SYSTEMS WITH DATA-DRIVEN PRECISION.</p>
       </div>
 
-      <div className="showcase-content">
-        <div className="showcase-glow"></div>
-        
-        {/* Row 1: The Terminal (Identity) */}
-        <motion.div 
-          className="terminal-container"
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-        >
-          <div className="bento-card terminal-card glass">
-            <div className="card-header">
-              <div className="dots"><span></span><span></span><span></span></div>
-              <span className="window-title">system_monitor.sh</span>
-            </div>
-            <div className="terminal-body">
+      <div className="showcase-content-comic">
+        <div className="panel-grid-comic">
+          {/* Terminal Panel */}
+          <div className="manga-panel terminal-panel-comic">
+            <div className="panel-label-comic">SYSTEM_LOGS.EXE</div>
+            <div className="terminal-body-comic">
               <AnimatePresence mode='popLayout'>
                 {terminalLines.map((line, i) => (
                   <motion.div 
@@ -86,7 +68,7 @@ const SystemShowcase = () => {
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 10 }}
-                    className={`terminal-line ${line.type}`}
+                    className={`terminal-line-comic ${line.type}`}
                   >
                     {line.text}
                   </motion.div>
@@ -94,314 +76,238 @@ const SystemShowcase = () => {
               </AnimatePresence>
             </div>
           </div>
-        </motion.div>
 
-        {/* Row 2: The Simulator (Depth) */}
-        <motion.div 
-          className="simulator-container glass"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-        >
-          <div className="simulator-header">
-            <h3>Scale & Performance Simulator</h3>
-            <div className="live-badge">REAL-TIME SIMULATION</div>
-          </div>
-
-          <div className="simulator-main">
-            {/* Control Panel */}
-            <div className="controls">
-              <div className="control-group">
-                <label>System Load: {load}%</label>
+          {/* Controls Panel */}
+          <div className="manga-panel controls-panel-comic">
+            <div className="panel-label-comic">CONTROL_CENTER</div>
+            <div className="controls-comic">
+              <div className="control-group-comic">
+                <label>SYSTEM LOAD: <span className="load-val">{load}%</span></label>
                 <input 
-                  type="range" 
-                  min="10" 
-                  max="100" 
-                  value={load} 
+                  type="range" min="10" max="100" value={load} 
                   onChange={(e) => setLoad(parseInt(e.target.value))}
-                  className="stylized-slider"
+                  className="comic-range"
                 />
               </div>
-              <div className="toggles">
+              <div className="toggles-comic">
                 <button 
-                  className={`toggle-btn ${isCaching ? 'active' : ''}`}
+                  className={`comic-toggle ${isCaching ? 'active' : ''}`}
                   onClick={() => setIsCaching(!isCaching)}
                 >
-                  {isCaching ? '✅' : '⚡'} Enable Redis Cache
+                  REDIS CACHE: {isCaching ? 'ON' : 'OFF'}
                 </button>
                 <button 
-                  className={`toggle-btn ${isScaling ? 'active' : ''}`}
+                  className={`comic-toggle ${isScaling ? 'active' : ''}`}
                   onClick={() => setIsScaling(!isScaling)}
                 >
-                  {isScaling ? '✅' : '🌐'} Horizontal Scaling
+                  H-SCALING: {isScaling ? 'ON' : 'OFF'}
                 </button>
               </div>
             </div>
-
-            {/* Metrics Dashboard */}
-            <div className="metrics-grid">
-              <div className="metric-card">
-                <span className="label">Latency</span>
-                <span className="value">{metrics.latency}ms</span>
-                <div className="mini-trend" style={{ background: metrics.latency < 50 ? '#4ade80' : metrics.latency < 200 ? '#facc15' : '#f87171' }}></div>
-              </div>
-              <div className="metric-card">
-                <span className="label">Throughput</span>
-                <span className="value">{metrics.throughput.toLocaleString()} req/s</span>
-              </div>
-              <div className="metric-card">
-                <span className="label">CPU Usage</span>
-                <span className="value">{metrics.cpu}%</span>
-                <div className="usage-bar"><div className="fill" style={{ width: `${metrics.cpu}%`, background: metrics.cpu > 80 ? '#f87171' : '#4ade80' }}></div></div>
-              </div>
-            </div>
-
-            {/* Architecture Visualization */}
-            <div className="arch-viz">
-               <div className={`node lb ${load > 70 && !isScaling ? 'stress' : ''}`}>LB</div>
-               <div className="flow">
-                  <motion.div 
-                    animate={{ x: [0, 100], opacity: [1, 0] }} 
-                    transition={{ duration: 0.5, repeat: Infinity, ease: "linear" }}
-                    className="packet"
-                  />
-               </div>
-               <div className="server-group">
-                 <div className={`node srv ${load > 50 && !isScaling ? 'stress' : ''}`}>App</div>
-                 {isScaling && <div className="node srv">App</div>}
-                 {isScaling && <div className="node srv">App</div>}
-               </div>
-               <div className="flow"></div>
-               <div className={`node db`}>DB</div>
-            </div>
           </div>
-        </motion.div>
+        </div>
+
+        {/* Metrics Row */}
+        <div className="metrics-row-comic">
+          <div className="manga-panel metric-card-comic">
+            <div className="metric-label">LATENCY</div>
+            <div className="metric-value">{metrics.latency}MS</div>
+          </div>
+          <div className="manga-panel metric-card-comic">
+            <div className="metric-label">THROUGHPUT</div>
+            <div className="metric-value">{metrics.throughput.toLocaleString()} R/S</div>
+          </div>
+          <div className="manga-panel metric-card-comic">
+            <div className="metric-label">CPU</div>
+            <div className="metric-value">{metrics.cpu}%</div>
+            <div className="cpu-bar-comic"><div className="fill" style={{ width: `${metrics.cpu}%` }}></div></div>
+          </div>
+        </div>
       </div>
 
       <style>{`
-        .system-showcase {
-          width: 100%;
-          min-height: 100vh;
-          padding: 100px 40px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 60px;
-          background: linear-gradient(to bottom, transparent, rgba(14, 165, 233, 0.05));
-          position: relative;
-          overflow: hidden;
+        .system-showcase-comic {
+          padding: 80px 40px;
+          background: #fff;
+          border-top: 4px solid #000;
         }
 
-        .showcase-header {
+        .showcase-header-comic {
           text-align: center;
-          max-width: 800px;
-          z-index: 10;
+          margin-bottom: 60px;
         }
 
-        .section-title {
-          font-size: 3.5rem;
-          font-weight: 800;
-          color: #fff;
-          margin-bottom: 20px;
+        .section-title-comic {
+          font-family: 'Bangers', cursive;
+          font-size: 4rem;
+          color: #000;
+          letter-spacing: 2px;
         }
 
-        .section-title .highlight {
-          color: var(--accent-light);
+        .highlight-comic {
+          color: var(--accent);
+          -webkit-text-stroke: 1px #000;
         }
 
-        .section-subtitle {
-          font-size: 1.2rem;
-          color: var(--text-secondary);
-          opacity: 0.8;
-        }
-
-        .showcase-content {
-          width: 100%;
-          max-width: 1100px;
-          display: flex;
-          flex-direction: column;
-          gap: 40px;
-          z-index: 1;
-        }
-
-        .showcase-glow {
-          position: absolute;
-          width: 800px;
-          height: 800px;
-          background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%);
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          filter: blur(100px);
-          pointer-events: none;
-          z-index: -1;
-        }
-
-        /* --- Terminal Styling --- */
-        .terminal-container {
-          width: 100%;
-        }
-
-        .terminal-card {
-          min-height: 300px;
-          background: rgba(0, 0, 0, 0.6) !important;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          font-family: 'Fira Code', monospace;
-          box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
-          backdrop-filter: blur(20px);
-          padding: 24px;
-          border-radius: 24px;
-        }
-
-        .card-header {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          margin-bottom: 20px;
-        }
-
-        .window-title { color: #888; font-size: 0.85rem; }
-
-        /* --- Simulator Styling --- */
-        .simulator-container {
-          padding: 32px;
-          border-radius: 32px;
-          background: rgba(15, 23, 42, 0.4);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          display: flex;
-          flex-direction: column;
-          gap: 32px;
-        }
-
-        .simulator-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .simulator-header h3 { font-size: 1.5rem; color: #fff; }
-
-        .live-badge {
-          background: rgba(34, 197, 94, 0.1);
-          color: #4ade80;
-          padding: 4px 12px;
-          border-radius: 20px;
-          font-size: 0.75rem;
+        .section-subtitle-comic {
+          font-family: 'Comic Neue', cursive;
           font-weight: 700;
-          letter-spacing: 1px;
+          font-size: 1.2rem;
+          color: #444;
         }
 
-        .simulator-main {
+        .showcase-content-comic {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          gap: 30px;
+        }
+
+        .panel-grid-comic {
           display: grid;
-          grid-template-columns: 300px 1fr;
-          gap: 40px;
+          grid-template-columns: 1.5fr 1fr;
+          gap: 30px;
         }
 
-        .controls { display: flex; flex-direction: column; gap: 30px; }
+        .manga-panel {
+          background: #fff;
+          border: 4px solid #000;
+          position: relative;
+          padding: 30px;
+          box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+        }
 
-        .control-group { display: flex; flex-direction: column; gap: 12px; }
-        .control-group label { color: var(--text-secondary); font-size: 0.9rem; }
+        .panel-label-comic {
+          position: absolute;
+          top: -15px;
+          left: 20px;
+          background: #000;
+          color: #fff;
+          padding: 2px 15px;
+          font-family: 'Bangers', cursive;
+          font-size: 1.1rem;
+        }
 
-        .stylized-slider {
+        .terminal-panel-comic {
+          background: #111;
+          color: #4ade80;
+          min-height: 250px;
+          font-family: monospace;
+          box-shadow: 10px 10px 0 var(--accent);
+        }
+
+        .terminal-line-comic {
+          margin-bottom: 8px;
+          font-size: 1.1rem;
+        }
+
+        .terminal-line-comic.action { color: #60a5fa; }
+        .terminal-line-comic.success { color: #4ade80; }
+        .terminal-line-comic.system { color: #facc15; }
+
+        .controls-comic {
+          display: flex;
+          flex-direction: column;
+          gap: 25px;
+          height: 100%;
+          justify-content: center;
+        }
+
+        .control-group-comic label {
+          display: block;
+          font-family: 'Bangers', cursive;
+          font-size: 1.5rem;
+          margin-bottom: 15px;
+        }
+
+        .load-val { color: var(--accent); }
+
+        .comic-range {
           -webkit-appearance: none;
           width: 100%;
-          height: 6px;
-          background: rgba(255,255,255,0.1);
-          border-radius: 3px;
+          height: 15px;
+          background: #eee;
+          border: 3px solid #000;
           outline: none;
         }
-        .stylized-slider::-webkit-slider-thumb {
+
+        .comic-range::-webkit-slider-thumb {
           -webkit-appearance: none;
-          width: 20px;
-          height: 20px;
-          background: var(--accent);
-          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          background: #000;
           cursor: pointer;
-          box-shadow: 0 0 10px var(--accent);
+          border: 2px solid #fff;
         }
 
-        .toggles { display: flex; flex-direction: column; gap: 12px; }
-        .toggle-btn {
-          padding: 12px;
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.05);
-          border-radius: 12px;
-          color: #fff;
-          cursor: pointer;
-          transition: 0.3s;
-          text-align: left;
-          font-size: 0.9rem;
-        }
-        .toggle-btn.active {
-          background: rgba(14, 165, 233, 0.1);
-          border-color: var(--accent);
-          box-shadow: 0 0 15px rgba(14, 165, 233, 0.2);
-        }
-
-        .metrics-grid {
-          grid-column: span 2;
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 20px;
-        }
-
-        .metric-card {
-          padding: 20px;
-          background: rgba(0,0,0,0.2);
-          border-radius: 20px;
+        .toggles-comic {
           display: flex;
           flex-direction: column;
-          gap: 8px;
-          position: relative;
-          overflow: hidden;
-        }
-        .metric-card .label { color: #888; font-size: 0.8rem; }
-        .metric-card .value { font-size: 1.8rem; font-weight: 700; color: #fff; }
-        
-        .mini-trend { position: absolute; bottom: 0; left: 0; height: 3px; width: 100%; transition: 0.5s; }
-        .usage-bar { height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px; }
-        .usage-bar .fill { height: 100%; transition: 0.3s; border-radius: 2px; }
-
-        .arch-viz {
-          grid-column: span 2;
-          height: 150px;
-          background: rgba(0,0,0,0.1);
-          border-radius: 20px;
-          display: flex;
-          align-items: center;
-          justify-content: space-around;
-          padding: 0 40px;
+          gap: 10px;
         }
 
-        .node {
-          width: 60px;
-          height: 60px;
-          background: rgba(255,255,255,0.05);
-          border: 1px solid rgba(255,255,255,0.1);
-          border-radius: 12px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+        .comic-toggle {
+          background: #fff;
+          border: 3px solid #000;
+          padding: 10px;
+          font-family: 'Bangers', cursive;
+          font-size: 1.2rem;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .comic-toggle.active {
+          background: #000;
           color: #fff;
-          font-weight: 700;
-          font-size: 0.8rem;
-          transition: 0.3s;
-        }
-        .node.stress { border-color: #f87171; box-shadow: 0 0 15px rgba(248, 113, 113, 0.3); animation: shake 0.5s infinite; }
-
-        .server-group { display: flex; gap: 10px; }
-        .flow { flex: 1; height: 1px; background: rgba(255,255,255,0.05); position: relative; margin: 0 20px; }
-        .packet { position: absolute; width: 10px; height: 1px; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
-
-        @keyframes shake {
-          0%, 100% { transform: translateX(0); }
-          25% { transform: translateX(-2px); }
-          75% { transform: translateX(2px); }
+          transform: translate(4px, 4px);
+          box-shadow: none;
         }
 
-        @media (max-width: 1000px) {
-          .simulator-main { grid-template-columns: 1fr; }
-          .metrics-grid { grid-column: span 1; }
-          .arch-viz { display: none; }
+        .comic-toggle:not(.active) {
+          box-shadow: 4px 4px 0 #000;
+        }
+
+        .metrics-row-comic {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 30px;
+        }
+
+        .metric-card-comic {
+          text-align: center;
+          padding: 20px;
+        }
+
+        .metric-label {
+          font-family: 'Bangers', cursive;
+          font-size: 1.2rem;
+          color: #888;
+        }
+
+        .metric-value {
+          font-family: 'Bangers', cursive;
+          font-size: 2.5rem;
+          color: #000;
+          margin: 10px 0;
+        }
+
+        .cpu-bar-comic {
+          height: 12px;
+          background: #eee;
+          border: 2px solid #000;
+        }
+
+        .cpu-bar-comic .fill {
+          height: 100%;
+          background: var(--accent);
+          transition: width 0.3s;
+        }
+
+        @media (max-width: 900px) {
+          .panel-grid-comic { grid-template-columns: 1fr; }
+          .metrics-row-comic { grid-template-columns: 1fr; }
+          .section-title-comic { font-size: 2.5rem; }
         }
       `}</style>
     </section>

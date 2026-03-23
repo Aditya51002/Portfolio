@@ -1,234 +1,196 @@
-import React from 'react';
-
 const Education = () => {
   return (
-    <div className="page-container glass edu-page">
-      <h2 className="page-title">Education</h2>
-
-      {/* Top Header Card */}
-      <div className="edu-header about-card">
-        <div className="badge badge-yellow">EDUCATION</div>
-        <h2>Academic Journey</h2>
-        <p>A concise overview of my formal education and foundational computer science studies.</p>
+    <div className="page-container-comic education-page">
+      <h2 className="page-title-comic">EDUCATION</h2>
+      
+      <div className="education-intro-comic">
+        <div className="manga-panel edu-hero-panel">
+          <div className="speech-bubble-comic left">ACADEMIC JOURNEY!</div>
+          <p className="comic-text">A CHRONICLE OF MY FORMAL QUEST FOR KNOWLEDGE AND TECHNICAL MASTERY.</p>
+        </div>
       </div>
 
-      <div className="edu-layout">
-        {/* Card 1: B.Tech */}
-        <div className="about-card edu-detail-card">
-          <div className="edu-top">
-            <div>
-              <h3 className="degree-title">B.Tech in Computer Science and Engineering</h3>
-              <p className="university-name">Lovely Professional University, Jalandhar, Punjab</p>
-              <p className="edu-years text-secondary">Aug 2021 – Present</p>
-            </div>
+      <div className="edu-grid-comic">
+        {/* B.Tech */}
+        <div className="manga-panel edu-card-comic btech-panel">
+          <div className="panel-label-comic">DEGREE_NODE</div>
+          <h3 className="edu-degree-comic">B.TECH IN COMPUTER SCIENCE</h3>
+          <p className="edu-uni-comic">LOVELY PROFESSIONAL UNIVERSITY</p>
+          <div className="edu-footer-comic">
+            <span className="edu-date-comic">AUG 2021 - PRESENT</span>
+            <span className="edu-status-comic">PURSUING</span>
           </div>
-
-          <div className="pill cgpa-pill">
-            (Pursuing)
-          </div>
-
-          <div className="subject-pills">
-            <span className="pill pill-yellow">Data Structures</span>
-            <span className="pill pill-blue">Algorithms</span>
-            <span className="pill pill-pink">Operating Systems</span>
-            <span className="pill pill-yellow">DBMS</span>
-            <span className="pill pill-blue">Computer Networks</span>
+          <div className="edu-subjects-comic">
+            <span>DATA STRUCTURES</span>
+            <span>ALGORITHMS</span>
+            <span>OPERATING SYSTEMS</span>
+            <span>DBMS</span>
           </div>
         </div>
 
-        {/* Card 2: 12th */}
-        <div className="about-card edu-detail-card">
-          <div className="edu-top">
-            <div>
-              <h3 className="degree-title">Intermediate (Class 12th) - Science</h3>
-              <p className="university-name">Vishnu Bhagwan Public School, Prayagraj, UP</p>
-              <p className="edu-years text-secondary">Apr 2020 – Mar 2021</p>
-            </div>
+        {/* 12th */}
+        <div className="manga-panel edu-card-comic inter-panel">
+          <div className="panel-label-comic">SCHOOL_NODE_A</div>
+          <h3 className="edu-degree-comic">INTERMEDIATE (CLASS 12TH)</h3>
+          <p className="edu-uni-comic">VISHNU BHAGWAN PUBLIC SCHOOL</p>
+          <div className="edu-footer-comic">
+            <span className="edu-date-comic">APR 2020 - MAR 2021</span>
           </div>
-
-          <div className="subject-pills">
-            <span className="pill pill-yellow">Physics</span>
-            <span className="pill pill-blue">Chemistry</span>
-            <span className="pill pill-pink">Mathematics</span>
-            <span className="pill pill-yellow">English</span>
-            <span className="pill pill-blue">Computer Science</span>
-            <span className="pill pill-blue">Physical Education</span>
+          <div className="edu-subjects-comic">
+            <span>PHYSICS</span>
+            <span>CHEMISTRY</span>
+            <span>MATHS</span>
           </div>
         </div>
 
-        {/* Card 3: 10th */}
-        <div className="about-card edu-detail-card">
-          <div className="edu-top">
-            <div>
-              <h3 className="degree-title">Matriculation (Class 10th)</h3>
-              <p className="university-name">Army Public School, Prayagraj, UP</p>
-              <p className="edu-years text-secondary">Apr 2018 – Mar 2019</p>
-            </div>
+        {/* 10th */}
+        <div className="manga-panel edu-card-comic matric-panel">
+          <div className="panel-label-comic">SCHOOL_NODE_B</div>
+          <h3 className="edu-degree-comic">MATRICULATION (CLASS 10TH)</h3>
+          <p className="edu-uni-comic">ARMY PUBLIC SCHOOL</p>
+          <div className="edu-footer-comic">
+            <span className="edu-date-comic">APR 2018 - MAR 2019</span>
           </div>
-
-          <div className="subject-pills">
-            <span className="pill pill-yellow">Science</span>
-            <span className="pill pill-blue">Mathematics</span>
-            <span className="pill pill-pink">Social Studies</span>
-            <span className="pill pill-yellow">English</span>
-            <span className="pill pill-blue">Computer Science</span>
-            <span className="pill pill-yellow">Hindi</span>
+          <div className="edu-subjects-comic">
+            <span>SCIENCE</span>
+            <span>MATHS</span>
+            <span>HINDI</span>
           </div>
         </div>
       </div>
 
       <style>{`
-        .edu-page {
-          max-width: 1200px; /* Increased to allow wider cards */
+        .education-page {
+          padding: 60px;
+          background: #fff;
         }
 
-        .edu-header {
-          margin-bottom: 30px;
-          text-align: left;
-          padding: 30px 40px;
+        .page-title-comic {
+          font-family: 'Bangers', cursive;
+          font-size: 5rem;
+          color: #000;
+          text-align: center;
+          margin-bottom: 40px;
+          -webkit-text-stroke: 2px #000;
+          text-shadow: 4px 4px 0 var(--accent);
         }
 
-        .edu-header h2 {
-          font-size: 2.2rem;
+        .edu-hero-panel {
+          text-align: center;
+          margin-bottom: 50px;
+          padding: 40px;
+          background-image: radial-gradient(circle, #eee 1px, transparent 1px);
+          background-size: 15px 15px;
+        }
+
+        .speech-bubble-comic {
+          position: relative;
+          background: #000;
           color: #fff;
-          margin-bottom: 10px;
-          font-weight: 600;
+          padding: 10px 20px;
+          font-family: 'Bangers', cursive;
+          font-size: 1.8rem;
+          display: inline-block;
+          margin-bottom: 20px;
+          border: 3px solid #000;
         }
 
-        .edu-header p {
-          color: var(--text-secondary);
+        .comic-text {
+          font-family: 'Comic Neue', cursive;
+          font-weight: 700;
+          font-size: 1.2rem;
+          color: #333;
+        }
+
+        .edu-grid-comic {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: 40px;
+        }
+
+        .manga-panel {
+          border: 4px solid #000;
+          background: #fff;
+          box-shadow: 10px 10px 0 #000;
+          position: relative;
+          padding: 30px;
+          transition: 0.2s;
+        }
+
+        .manga-panel:hover {
+          transform: translate(-5px, -5px);
+          box-shadow: 15px 15px 0 var(--accent);
+        }
+
+        .panel-label-comic {
+          position: absolute;
+          top: -15px;
+          left: 20px;
+          background: #000;
+          color: #fff;
+          padding: 2px 15px;
+          font-family: 'Bangers', cursive;
           font-size: 1.1rem;
         }
 
-        .badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          background: rgba(255, 255, 255, 0.1);
-          color: #fff;
-          padding: 8px 16px;
-          border-radius: 8px;
-          font-size: 0.85rem;
-          font-weight: 600;
-          letter-spacing: 1px;
+        .edu-degree-comic {
+          font-family: 'Bangers', cursive;
+          font-size: 2rem;
+          color: #000;
+          line-height: 1.1;
+          margin-bottom: 10px;
+        }
+
+        .edu-uni-comic {
+          font-family: 'Comic Neue', cursive;
+          font-weight: 700;
+          font-size: 1.1rem;
+          color: #666;
           margin-bottom: 20px;
         }
 
-        .badge-yellow {
-          background: rgba(250, 204, 21, 0.15);
-          color: #facc15;
-          border: 1px solid rgba(250, 204, 21, 0.3);
-        }
-
-        .edu-layout {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 25px;
-          align-items: stretch;
-        }
-
-        .about-card {
-          background: rgba(20, 20, 20, 0.4);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 20px;
-          padding: 30px;
-          position: relative;
-          transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-        }
-
-        .about-card:hover {
-          transform: translateY(-5px);
-          border-color: rgba(147, 51, 234, 0.5);
-          box-shadow: 0 15px 35px rgba(0,0,0, 0.4), 0 0 20px rgba(107, 33, 168, 0.2);
-          background: rgba(30, 30, 30, 0.6);
-        }
-
-        .edu-detail-card {
+        .edu-footer-comic {
           display: flex;
-          flex-direction: column;
-          gap: 20px;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 20px;
         }
 
-        .degree-title {
-          font-size: 1.6rem;
-          color: #fff;
-          font-weight: 700;
-          margin-bottom: 8px;
+        .edu-date-comic {
+          font-family: 'Bangers', cursive;
+          font-size: 1rem;
+          background: #eee;
+          padding: 2px 10px;
+          border: 2px solid #000;
         }
 
-        .university-name {
-          font-size: 1.15rem;
-          color: #e0e0e0;
-          margin-bottom: 4px;
+        .edu-status-comic {
+          font-family: 'Bangers', cursive;
+          font-size: 1rem;
+          color: var(--accent);
         }
 
-        .edu-years {
-          font-size: 0.95rem;
-        }
-
-        .text-secondary {
-          color: var(--text-secondary);
-        }
-
-        .pill {
-          display: inline-block;
-          font-size: 0.85rem;
-          font-weight: 600;
-          padding: 8px 16px;
-          border-radius: 20px;
-          white-space: nowrap;
-        }
-
-        .cgpa-pill {
-          align-self: flex-start;
-          background: rgba(74, 222, 128, 0.15);
-          color: #4ade80;
-          border: 1px solid rgba(74, 222, 128, 0.3);
-        }
-
-        .subject-pills {
+        .edu-subjects-comic {
           display: flex;
           flex-wrap: wrap;
-          gap: 12px;
-          margin-top: 10px;
+          gap: 10px;
         }
 
-        .pill-yellow {
-          background: rgba(250, 204, 21, 0.1);
-          color: #facc15;
-          border: 1px solid rgba(250, 204, 21, 0.2);
+        .edu-subjects-comic span {
+          font-family: 'Comic Neue', cursive;
+          font-weight: 700;
+          font-size: 0.9rem;
+          background: #fff;
+          border: 2px solid #000;
+          padding: 2px 10px;
         }
 
-        .pill-blue {
-          background: rgba(96, 165, 250, 0.1);
-          color: #60a5fa;
-          border: 1px solid rgba(96, 165, 250, 0.2);
-        }
-
-        .pill-pink {
-          background: rgba(244, 114, 182, 0.1);
-          color: #f472b6;
-          border: 1px solid rgba(244, 114, 182, 0.2);
-        }
-
-        /* Color-coded edges for columns, matching the skills style */
-        .edu-detail-card:nth-child(1) { border-left: 4px solid #4ade80; }
-        .edu-detail-card:nth-child(2) { border-left: 4px solid #facc15; }
-        .edu-detail-card:nth-child(3) { border-left: 4px solid #60a5fa; }
-
-        /* Responsive Breakpoints */
-        @media (max-width: 1024px) {
-          .edu-layout {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
+        .btech-panel { border-top: 15px solid #000; }
+        .inter-panel { border-top: 15px solid #666; }
+        .matric-panel { border-top: 15px solid #ccc; }
 
         @media (max-width: 768px) {
-          .edu-layout {
-            grid-template-columns: 1fr;
-          }
+          .page-title-comic { font-size: 3rem; }
         }
       `}</style>
     </div>

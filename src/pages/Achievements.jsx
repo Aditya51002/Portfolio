@@ -1,137 +1,102 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-
 const Achievements = () => {
   const certifications = [
     {
-      title: "Privacy and Security in Online Social Media",
+      title: "PRIVACY AND SECURITY IN SOCIAL MEDIA",
       issuer: "NPTEL",
-      issued: "Nov 2025",
-      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVtVfByN7kOqYqP3Z6Lh6s5M7o4_8M9_O3-A&s", // Reliable NPTEL logo
+      issued: "NOV 2025",
+      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVtVfByN7kOqYqP3Z6Lh6s5M7o4_8M9_O3-A&s",
       link: "#"
     },
     {
-      title: "Java Data Structures and Algorithms with Java",
-      issuer: "CipherSchools",
-      issued: "Jun 2025",
-      logo: "https://www.cipherschools.com/static/media/Cipherschools_icon@2x.3b979313.png", // Corrected CipherSchools logo
+      title: "JAVA DATA STRUCTURES & ALGORITHMS",
+      issuer: "CIPHERSCHOOLS",
+      issued: "JUN 2025",
+      logo: "https://www.cipherschools.com/static/media/Cipherschools_icon@2x.3b979313.png",
       link: "#"
     },
     {
-      title: "Java programming",
-      issuer: "HackerRank",
-      issued: "Jun 2024",
+      title: "JAVA PROGRAMMING",
+      issuer: "HACKERRANK",
+      issued: "JUN 2024",
       logo: "https://upload.wikimedia.org/wikipedia/commons/4/40/HackerRank_Icon-1000px.png",
       link: "#"
     },
     {
-      title: "Programming in C# Certification",
-      issuer: "Lovely Professional University (LPU)",
-      issued: "Apr 2024",
-      credentialId: "33aO4dP70Q80n8co6",
+      title: "PROGRAMMING IN C# CERTIFICATION",
+      issuer: "LPU",
+      issued: "APR 2024",
       logo: "https://upload.wikimedia.org/wikipedia/en/thumb/3/3a/Lovely_Professional_University_logo.png/220px-Lovely_Professional_University_logo.png",
       link: "#"
     },
     {
-      title: "Learn to Code in Python 3: Programming beginner to advanced",
-      issuer: "Udemy",
-      issued: "Feb 2024",
+      title: "PYTHON 3: BEGINNER TO ADVANCED",
+      issuer: "UDEMY",
+      issued: "FEB 2024",
       logo: "https://www.vectorlogo.zone/logos/udemy/udemy-icon.svg",
       link: "#"
     },
     {
-      title: "DBMS",
-      issuer: "Udemy",
-      issued: "Feb 2024",
+      title: "DATABASE MANAGEMENT SYSTEMS",
+      issuer: "UDEMY",
+      issued: "FEB 2024",
       logo: "https://www.vectorlogo.zone/logos/udemy/udemy-icon.svg",
       link: "#"
     },
     {
-      title: "Mastering C++ Language",
-      issuer: "Udemy",
-      issued: "Jun 2024",
-      logo: "https://www.vectorlogo.zone/logos/udemy/udemy-icon.svg",
-      link: "#"
-    },
-    {
-      title: "Adobe Premiere Pro Masterclass for Video Editing",
-      issuer: "Udemy",
-      issued: "Jun 2024",
-      logo: "https://www.vectorlogo.zone/logos/udemy/udemy-icon.svg",
-      link: "#"
-    },
-    {
-      title: "Responsive Web Design",
-      issuer: "freeCodeCamp",
-      issued: "Sep 2023",
+      title: "RESPONSIVE WEB DESIGN",
+      issuer: "FREECODECAMP",
+      issued: "SEP 2023",
       logo: "https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg",
       link: "#"
     }
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 }
-  };
-
   return (
-    <div className="page-container glass">
-      <motion.h2 
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        className="page-title"
-      >
-        Achievements & Certifications
-      </motion.h2>
-
-      <div className="achievements-section">
-        <h3 className="section-header">Key Achievements</h3>
-        <div className="achievements-list">
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="achievement-item">
-            <span className="bullet">🏆</span>
-            <p>Solved 100+ DSA problems across multiple platforms, significantly enhancing algorithmic thinking and pattern recognition.</p>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0, transition: { delay: 0.1 } }} className="achievement-item">
-             <span className="bullet">🏆</span>
-             <p>Achieved the title of Top Performer in a Web Hackathon.</p>
-          </motion.div>
+    <div className="page-container-comic achievements-page">
+      <h2 className="page-title-comic">ACHIEVEMENTS</h2>
+      
+      <div className="achievements-intro-comic">
+        <div className="manga-panel hero-achievement-panel">
+          <div className="sfx-text-comic">BAM!</div>
+          <h3 className="section-title-comic">MILESTONES & RECOGNITION</h3>
+          <p className="comic-text">A CHRONICLE OF MY TECHNICAL TRIUMPHS AND ACADEMIC CONQUESTS.</p>
         </div>
       </div>
 
-      <div className="certifications-section">
-        <h3 className="section-header">Licenses & Certifications</h3>
-        <motion.div 
-          className="certifications-grid"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-        >
-          {certifications.map((cert, index) => (
-            <motion.div key={index} variants={itemVariants} className="cert-card glass">
-              <div className="cert-logo-container">
-                <img src={cert.logo} alt={cert.issuer} className="cert-logo" />
+      <div className="main-grid-comic">
+        {/* Key Achievements */}
+        <div className="manga-panel key-achievements-panel">
+          <div className="panel-label-comic">TOP FEATS</div>
+          <ul className="feat-list-comic">
+            <li>
+              <span className="feat-icon">🏆</span>
+              <p>SOLVED 100+ DSA PROBLEMS ACROSS MULTIPLE PLATFORMS, MASTERING THE ART OF ALGORITHMIC CRAFT.</p>
+            </li>
+            <li>
+              <span className="feat-icon">🏆</span>
+              <p>ACHIEVED TOP PERFORMER STATUS IN A WEB HACKATHON, DOMINATING THE FRONTEND ARENA.</p>
+            </li>
+          </ul>
+        </div>
+
+        {/* Certifications Grid */}
+        <div className="cert-section-comic">
+          <h3 className="sub-header-comic">CERTIFICATIONS</h3>
+          <div className="cert-grid-comic">
+            {certifications.map((cert, index) => (
+              <div key={index} className="manga-panel cert-card-comic">
+                <div className="cert-logo-comic">
+                  <img src={cert.logo} alt={cert.issuer} />
+                </div>
+                <div className="cert-details-comic">
+                  <h4 className="cert-name-comic">{cert.title}</h4>
+                  <p className="cert-issuer-comic">{cert.issuer} | {cert.issued}</p>
+                  <a href={cert.link} className="cert-link-comic">VIEW CREDENTIAL ↗</a>
+                </div>
               </div>
-              <div className="cert-info">
-                <h4 className="cert-title">{cert.title}</h4>
-                <p className="cert-issuer">{cert.issuer}</p>
-                <p className="cert-issued">Issued {cert.issued}</p>
-                {cert.credentialId && <p className="cert-id">Credential ID {cert.credentialId}</p>}
-                <a href={cert.link} target="_blank" rel="noopener noreferrer" className="show-credential-btn">
-                   Show credential <span className="arrow-icon">↗</span>
-                </a>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
       <style>{`
         .achievements-section, .certifications-section {
@@ -157,8 +122,9 @@ const Achievements = () => {
           display: flex;
           gap: 15px;
           padding: 20px;
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          background: var(--bg-secondary);
+          border: 1px solid var(--surface-border);
+          box-shadow: var(--shadow-lg), var(--surface-inner-glow);
           border-radius: 12px;
           color: #ccc;
           line-height: 1.6;
@@ -177,16 +143,19 @@ const Achievements = () => {
           gap: 20px;
           padding: 24px;
           border-radius: 16px;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          background: var(--surface-bg);
+          border: 1px solid var(--surface-border);
+          box-shadow: var(--shadow-lg), var(--surface-inner-glow);
           transition: all 0.3s ease;
           position: relative;
+          overflow: hidden;
         }
 
         .cert-card:hover {
-          background: rgba(255, 255, 255, 0.05);
-          border-color: var(--accent-light);
+          background: #1e293b;
+          border-color: var(--accent);
           transform: translateX(10px);
+          box-shadow: 0 10px 30px rgba(0,0,0, 0.4), 0 0 20px var(--accent-glow);
         }
 
         .cert-logo-container {

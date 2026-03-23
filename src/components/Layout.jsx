@@ -28,19 +28,19 @@ const Layout = ({ children }) => {
         .layout {
           display: flex;
           flex-direction: column;
-          height: 100vh;
+          min-height: 100vh;
           width: 100vw;
-          overflow: hidden;
+          overflow-x: hidden;
         }
 
         .main-content {
           flex: 1;
           display: flex;
-          justify-content: center;
+          flex-direction: column;
           align-items: center;
           position: relative;
           z-index: 1;
-          overflow: hidden;
+          padding: 80px 20px;
         }
 
         .back-to-wheel-btn {

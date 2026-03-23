@@ -1,51 +1,130 @@
 const Learning = () => {
   return (
-    <div className="page-container glass">
-      <h2 className="page-title">Current Focus</h2>
-      <div className="content-wrapper">
-        <p>I am continuously exploring new technologies to stay ahead of the curve and refine my technical stack. My current learning phase is focused on:</p>
-        
-        <div className="learning-item">
-          <h3>Advanced System Design</h3>
-          <p>Diving deep into distributed systems, microservices architectures, and understanding how to build highly scalable and fault-tolerant backends.</p>
+    <div className="page-container-comic learning-page">
+      <h2 className="page-title-comic">CURRENT FOCUS</h2>
+      
+      <div className="learning-intro-comic">
+        <div className="manga-panel focus-hero-panel">
+          <div className="sfx-text-comic">SLAM!</div>
+          <p className="comic-text">I AM CONTINUOUSLY EXPLORING NEW TECHNOLOGIES TO STAY AHEAD OF THE CURVE AND REFINE MY TECHNICAL STACK.</p>
+        </div>
+      </div>
+
+      <div className="learning-grid-comic">
+        <div className="manga-panel learning-item-comic">
+          <div className="panel-label-comic">STAGE_01</div>
+          <h3 className="learning-title-comic">ADVANCED SYSTEM DESIGN</h3>
+          <p className="learning-desc-comic">DIVING DEEP INTO DISTRIBUTED SYSTEMS, MICROSERVICES ARCHITECTURES, AND SCALABLE BACKENDS.</p>
         </div>
 
-        <div className="learning-item">
-          <h3>Next.js & Server-Side Rendering</h3>
-          <p>Transitioning from standard React Single Page Applications (SPAs) to robust, SEO-friendly frameworks like Next.js for enterprise-level frontend development.</p>
+        <div className="manga-panel learning-item-comic">
+          <div className="panel-label-comic">STAGE_02</div>
+          <h3 className="learning-title-comic">NEXT.JS & SSR</h3>
+          <p className="learning-desc-comic">TRANSITIONING TO ROBUST, SEO-FRIENDLY FRAMEWORKS FOR ENTERPRISE-LEVEL FRONTEND DEVELOPMENT.</p>
         </div>
 
-        <div className="learning-item">
-          <h3>DevOps & Cloud Deployment</h3>
-          <p>Expanding my knowledge on Docker containerization, CI/CD pipelines, and cloud computing platforms like AWS to streamline deployment workflows.</p>
+        <div className="manga-panel learning-item-comic">
+          <div className="panel-label-comic">STAGE_03</div>
+          <h3 className="learning-title-comic">DEVOPS & CLOUD</h3>
+          <p className="learning-desc-comic">MASTERING DOCKER, CI/CD PIPELINES, AND AWS TO STREAMLINE DEPLOYMENT WORKFLOWS.</p>
         </div>
       </div>
 
       <style>{`
-        .learning-item {
-          margin-top: 25px;
-          background: rgba(255, 255, 255, 0.03);
-          padding: 20px;
-          border-radius: 12px;
-          border-left: 4px solid var(--accent);
-          transition: transform 0.3s ease;
+        .learning-page {
+          padding: 60px;
+          background: #fff;
         }
 
-        .learning-item:hover {
-          transform: translateY(-3px);
-          background: rgba(255, 255, 255, 0.05);
-          border-left-color: var(--accent-light);
+        .page-title-comic {
+          font-family: 'Bangers', cursive;
+          font-size: 5rem;
+          color: #000;
+          text-align: center;
+          margin-bottom: 40px;
+          -webkit-text-stroke: 2px #000;
+          text-shadow: 4px 4px 0 var(--accent);
         }
 
-        .learning-item h3 {
-          font-size: 1.4rem;
-          color: var(--accent-light);
-          margin-bottom: 8px;
+        .focus-hero-panel {
+          text-align: center;
+          margin-bottom: 50px;
+          padding: 40px;
+          background-image: radial-gradient(circle, #eee 1px, transparent 1px);
+          background-size: 10px 10px;
         }
 
-        .learning-item p {
-          color: #cccccc;
-          line-height: 1.6;
+        .sfx-text-comic {
+          position: absolute;
+          top: -20px;
+          right: -20px;
+          background: var(--accent);
+          color: #fff;
+          font-family: 'Bangers', cursive;
+          font-size: 2rem;
+          padding: 5px 15px;
+          transform: rotate(15deg);
+          border: 3px solid #000;
+          box-shadow: -4px 4px 0 #000;
+        }
+
+        .comic-text {
+          font-family: 'Comic Neue', cursive;
+          font-weight: 700;
+          font-size: 1.2rem;
+          color: #333;
+        }
+
+        .learning-grid-comic {
+          display: flex;
+          flex-direction: column;
+          gap: 30px;
+          max-width: 900px;
+          margin: 0 auto;
+        }
+
+        .manga-panel {
+          border: 4px solid #000;
+          background: #fff;
+          box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+          position: relative;
+          padding: 30px;
+          transition: 0.2s;
+        }
+
+        .learning-item-comic:hover {
+          transform: translateX(10px);
+          border-left: 15px solid var(--accent);
+          box-shadow: 15px 15px 0 #000;
+        }
+
+        .panel-label-comic {
+          position: absolute;
+          top: -15px;
+          left: 20px;
+          background: #000;
+          color: #fff;
+          padding: 2px 15px;
+          font-family: 'Bangers', cursive;
+          font-size: 1.1rem;
+        }
+
+        .learning-title-comic {
+          font-family: 'Bangers', cursive;
+          font-size: 2rem;
+          color: #000;
+          margin-bottom: 10px;
+        }
+
+        .learning-desc-comic {
+          font-family: 'Comic Neue', cursive;
+          font-weight: 700;
+          font-size: 1.1rem;
+          color: #444;
+        }
+
+        @media (max-width: 768px) {
+          .page-title-comic { font-size: 3rem; }
         }
       `}</style>
     </div>

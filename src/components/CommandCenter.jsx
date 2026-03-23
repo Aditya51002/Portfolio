@@ -64,14 +64,15 @@ const CommandCenter = () => {
         .command-center-dock {
           display: flex;
           align-items: center;
-          padding: 12px 24px;
-          gap: 24px;
-          border-radius: 24px;
-          background: rgba(15, 23, 42, 0.4);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+          padding: 15px 30px;
+          gap: 30px;
+          border: 3px solid #000;
+          background: #fff;
+          box-shadow: 6px 6px 0 #000;
           margin-top: 30px;
           max-width: fit-content;
+          background-image: radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 1px);
+          background-size: 6px 6px;
         }
 
         .status-section {
@@ -87,56 +88,62 @@ const CommandCenter = () => {
         }
 
         .pulse {
-          width: 8px;
-          height: 8px;
-          background: #4ade80;
+          width: 10px;
+          height: 10px;
+          background: var(--accent);
+          border: 2px solid #000;
           border-radius: 50%;
-          box-shadow: 0 0 10px #4ade80;
           animation: statusPulse 2s infinite;
         }
 
         @keyframes statusPulse {
-          0% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.5); opacity: 0.4; }
-          100% { transform: scale(1); opacity: 1; }
+          0% { transform: scale(1); }
+          50% { transform: scale(1.3); }
+          100% { transform: scale(1); }
         }
 
         .status-text {
-          font-size: 0.7rem;
-          font-weight: 700;
-          color: var(--accent-light);
+          font-family: 'Bangers', cursive;
+          font-size: 0.9rem;
+          color: #000;
           letter-spacing: 1px;
         }
 
         .status-value {
-          font-size: 0.9rem;
-          color: var(--text-secondary);
-          font-weight: 400;
+          font-family: 'Comic Neue', cursive;
+          font-weight: 700;
+          font-size: 0.95rem;
+          color: #333;
         }
 
         .divider {
-          width: 1px;
+          width: 3px;
           height: 40px;
-          background: rgba(255, 255, 255, 0.1);
+          background: #000;
         }
 
         .links-section {
           display: flex;
-          gap: 12px;
+          gap: 15px;
         }
 
         .social-btn {
-          width: 40px;
-          height: 40px;
+          width: 45px;
+          height: 45px;
           display: flex;
           align-items: center;
           justify-content: center;
-          border-radius: 12px;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          transition: all 0.3s ease;
-          font-size: 1.2rem;
+          border: 2px solid #000;
+          background: #fff;
+          box-shadow: 3px 3px 0 #000;
+          transition: all 0.2s;
+          font-size: 1.5rem;
           text-decoration: none;
+        }
+
+        .social-btn:hover {
+          transform: translate(-1px, -1px);
+          box-shadow: 5px 5px 0 var(--accent);
         }
 
         .resume-section {
@@ -148,26 +155,32 @@ const CommandCenter = () => {
           display: flex;
           align-items: center;
           gap: 12px;
-          padding: 10px 20px;
-          background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
-          border: none;
-          border-radius: 16px;
+          padding: 10px 25px;
+          background: var(--accent);
+          border: 3px solid #000;
+          box-shadow: 4px 4px 0 #000;
           color: #fff;
+          font-family: 'Bangers', cursive;
           cursor: pointer;
-          transition: all 0.3s ease;
+          transition: all 0.2s;
+        }
+
+        .resume-download-btn:hover {
+          transform: translate(-1px, -1px);
+          box-shadow: 6px 6px 0 #000;
         }
 
         .btn-label {
-          font-weight: 600;
-          font-size: 0.95rem;
+          font-weight: 300;
+          font-size: 1.2rem;
+          letter-spacing: 1px;
         }
 
         .file-info {
-          font-size: 0.7rem;
-          opacity: 0.7;
-          background: rgba(0, 0, 0, 0.2);
-          padding: 2px 6px;
-          border-radius: 6px;
+          font-size: 0.8rem;
+          background: #000;
+          color: #fff;
+          padding: 2px 8px;
         }
 
         @media (max-width: 900px) {
@@ -176,21 +189,11 @@ const CommandCenter = () => {
             align-items: flex-start;
             max-width: 100%;
             width: 100%;
-            gap: 16px;
+            gap: 20px;
           }
           .divider {
             width: 100%;
-            height: 1px;
-          }
-          .status-section, .links-section, .resume-section {
-             width: 100%;
-          }
-          .links-section {
-            justify-content: space-between;
-          }
-          .resume-download-btn {
-            width: 100%;
-            justify-content: center;
+            height: 3px;
           }
         }
       `}</style>
