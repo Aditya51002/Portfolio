@@ -1,5 +1,5 @@
-import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const AboutSection = () => {
   return (
@@ -10,31 +10,39 @@ const AboutSection = () => {
         <div className="about-grid-comic">
           {/* Panel 1: Who Am I */}
           <div className="about-panel bento-2x2">
-            <div className="sfx-text" style={{ top: '-15px', left: '10px' }}>BOOM!</div>
+            <div className="sfx-text" style={{ top: '-20px', left: '-10px', transform: 'rotate(-10deg)' }}>BOOM!</div>
             <h3 className="panel-title">WHO AM I?</h3>
             <div className="speech-bubble">
-              HELLO! I'M ADITYA MAURYA, A DEVELOPER ON A MISSION TO BUILD THE FUTURE!
+              HELLO! I’M ADITYA MAURYA — A RESULTS-DRIVEN SOFTWARE ENGINEER BUILDING SCALABLE, HIGH-PERFORMANCE, AND RELIABLE DIGITAL SYSTEMS.
             </div>
             <p className="panel-text">
-              I'M A COMPUTER SCIENCE STUDENT WITH A PASSION FOR HIGH-PERFORMANCE SYSTEMS AND CREATIVE AI. I LOVE SOLVING COMPLEX PROBLEMS AND TURNING THEM INTO ELEGANT CODE.
+              I design, build, and optimize end-to-end applications, combining full-stack development, software testing, and Android engineering to deliver robust, production-ready solutions.
+            </p>
+            <p className="panel-text" style={{ fontSize: '0.95rem' }}>
+              I specialize in scalable MERN architectures, automation testing frameworks, and modern Android development (Kotlin + Jetpack Compose). I thrive on solving complex problems, engineering efficient systems, and ensuring software quality through rigorous testing and optimization.
+            </p>
+            <p className="panel-text" style={{ fontSize: '0.95rem' }}>
+              With a strong foundation in system design, performance tuning, and AI-driven solutions, I continuously push boundaries to build faster, smarter, and more resilient applications.
             </p>
           </div>
 
           {/* Panel 2: What I Do */}
           <div className="about-panel bento-1x2">
             <h3 className="panel-title">WHAT I DO</h3>
-            <ul className="panel-list">
-              <li>FULL-STACK DEV</li>
-              <li>SDET ARCHITECT</li>
-              <li>AI INTEGRATION</li>
+            <ul className="panel-list" style={{ fontSize: '0.9rem', listStyle: 'none', marginLeft: 0 }}>
+              <li><strong>BUILD SCALABLE FULL-STACK APPLICATIONS</strong> using MERN stack with clean architecture and high performance</li>
+              <li><strong>ENGINEER AUTOMATION TESTING FRAMEWORKS</strong> using Selenium, JMeter, and API testing to ensure reliability and quality</li>
+              <li><strong>DEVELOP MODERN ANDROID APPLICATIONS</strong> using Kotlin and Jetpack Compose with seamless UI/UX</li>
+              <li><strong>OPTIMIZE SYSTEM PERFORMANCE</strong> by improving backend efficiency, reducing latency, and enhancing scalability</li>
+              <li><strong>DESIGN API-DRIVEN ARCHITECTURES</strong> for secure, efficient, and maintainable systems</li>
+              <li><strong>INTEGRATE AI & REAL-TIME FEATURES</strong> to build intelligent and responsive applications</li>
             </ul>
-            <p className="panel-text">SPECIALIZING IN MERN STACK AND SCALABLE ARCHITECTURES.</p>
           </div>
 
           {/* Panel 3: Location */}
           <div className="about-panel bento-1x1">
             <h3 className="panel-title">LOCATION</h3>
-            <p className="panel-text" style={{ fontSize: '1.5rem', textAlign: 'center' }}>📍 INDIA</p>
+            <p className="panel-text" style={{ fontSize: '1.5rem', textAlign: 'center' }}>📍 PHAGWARA, PUNJAB, INDIA</p>
             <p className="panel-text" style={{ fontSize: '0.9rem' }}>OPEN TO REMOTE WORK & RELOCATION</p>
           </div>
 
@@ -42,9 +50,11 @@ const AboutSection = () => {
           <div className="about-panel bento-wide-comic">
             <h3 className="panel-title">THE MISSION</h3>
             <p className="panel-text">
-              ACTIVELY SEEKING SOFTWARE ENGINEERING OPPORTUNITIES WHERE I CAN PUSH THE BOUNDARIES OF PERFORMANCE AND UX.
+              I BUILD SYSTEMS THAT ARE FAST, SCALABLE, AND RELIABLE — TRANSFORMING COMPLEX IDEAS INTO REAL-WORLD SOLUTIONS THAT CREATE IMPACT.
             </p>
-            <div className="availability-tag">AVAILABLE NOW!</div>
+            <Link to="/contact" style={{ textDecoration: 'none' }}>
+              <div className="availability-tag">AVAILABLE NOW!</div>
+            </Link>
           </div>
         </div>
       </div>
@@ -90,11 +100,31 @@ const AboutSection = () => {
           flex-direction: column;
           gap: 15px;
           transition: transform 0.2s;
+          overflow: visible; /* Added to prevent clipping of SFX text */
         }
 
         .about-panel:hover {
           transform: translate(-3px, -3px);
           box-shadow: 12px 12px 0 var(--accent);
+        }
+
+        .availability-tag {
+          font-family: 'Bangers', cursive;
+          font-size: 1.5rem;
+          padding: 10px 20px;
+          background: var(--accent-secondary);
+          color: #fff;
+          border: 3px solid #000;
+          box-shadow: 5px 5px 0 #000;
+          transition: all 0.2s ease-in-out;
+          text-align: center;
+          white-space: nowrap;
+        }
+
+        .availability-tag:hover {
+          background: var(--accent);
+          color: #000;
+          cursor: pointer;
         }
 
         .bento-2x2 { grid-column: span 2; grid-row: span 2; }
@@ -117,20 +147,29 @@ const AboutSection = () => {
         }
 
         .panel-list {
-          list-style: square;
-          margin-left: 20px;
+          list-style: none;
+          margin-left: 0;
           font-family: 'Bangers', cursive;
-          font-size: 1.2rem;
+          font-size: 1.1rem;
           color: var(--accent-secondary);
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
         }
 
-        .availability-tag {
-          background: #000;
-          color: #fff;
-          padding: 10px 20px;
-          font-family: 'Bangers', cursive;
-          font-size: 1.5rem;
-          transform: rotate(2deg);
+        .panel-list li {
+          position: relative;
+          padding-left: 20px;
+          line-height: 1.2;
+        }
+
+        .panel-list li::before {
+          content: '■';
+          position: absolute;
+          left: 0;
+          color: var(--accent);
+          font-size: 0.8rem;
+          top: 2px;
         }
 
         @media (max-width: 900px) {

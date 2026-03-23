@@ -99,141 +99,171 @@ const Achievements = () => {
         </div>
       </div>
       <style>{`
-        .achievements-section, .certifications-section {
-          margin-top: 40px;
-          width: 100%;
+        .achievements-page {
+          padding: 60px 40px;
+          min-height: 100vh;
         }
 
-        .section-header {
-          font-size: 1.8rem;
+        .achievements-intro-comic {
+          max-width: 1200px;
+          margin: 0 auto 60px;
+        }
+
+        .hero-achievement-panel {
+          text-align: center;
+          padding: 60px;
+          background-image: radial-gradient(circle, #eee 1.5px, transparent 1.5px);
+          background-size: 20px 20px;
+        }
+
+        .section-title-comic {
+          font-family: 'Bangers', cursive;
+          font-size: 4rem;
+          color: #000;
+          margin-bottom: 20px;
+        }
+
+        .comic-text {
+          font-family: 'Comic Neue', cursive;
+          font-weight: 700;
+          font-size: 1.4rem;
+          color: #333;
+        }
+
+        .main-grid-comic {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: 1fr 2fr;
+          gap: 40px;
+          align-items: start;
+        }
+
+        .manga-panel {
+          border: 4px solid #000;
+          background: #fff;
+          box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+          position: relative;
+          padding: 40px;
+        }
+
+        .panel-label-comic {
+          position: absolute;
+          top: -15px;
+          left: 20px;
+          background: #000;
           color: #fff;
-          margin-bottom: 25px;
-          border-bottom: 1px solid rgba(255,255,255,0.1);
-          padding-bottom: 10px;
+          padding: 2px 15px;
+          font-family: 'Bangers', cursive;
+          font-size: 1.2rem;
         }
 
-        .achievements-list {
+        .feat-list-comic {
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          gap: 25px;
+        }
+
+        .feat-list-comic li {
+          display: flex;
+          gap: 20px;
+          align-items: flex-start;
+          background: #f8fafc;
+          padding: 20px;
+          border: 3px solid #000;
+          box-shadow: 5px 5px 0 #000;
+        }
+
+        .feat-icon { font-size: 2.5rem; }
+
+        .feat-list-comic p {
+          font-family: 'Bangers', cursive;
+          font-size: 1.1rem;
+          color: #000;
+          line-height: 1.3;
+        }
+
+        .sub-header-comic {
+          font-family: 'Bangers', cursive;
+          font-size: 3rem;
+          color: #000;
+          margin-bottom: 30px;
+          border-bottom: 5px solid #000;
+          width: fit-content;
+        }
+
+        .cert-grid-comic {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          gap: 25px;
+        }
+
+        .cert-card-comic {
           display: flex;
           flex-direction: column;
           gap: 15px;
+          padding: 25px;
+          transition: 0.2s;
         }
 
-        .achievement-item {
-          display: flex;
-          gap: 15px;
-          padding: 20px;
-          background: var(--bg-secondary);
-          border: 1px solid var(--surface-border);
-          box-shadow: var(--shadow-lg), var(--surface-inner-glow);
-          border-radius: 12px;
-          color: #ccc;
-          line-height: 1.6;
-        }
-
-        .bullet { font-size: 1.2rem; }
-
-        .certifications-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 20px;
-        }
-
-        .cert-card {
-          display: flex;
-          gap: 20px;
-          padding: 24px;
-          border-radius: 16px;
-          background: var(--surface-bg);
-          border: 1px solid var(--surface-border);
-          box-shadow: var(--shadow-lg), var(--surface-inner-glow);
-          transition: all 0.3s ease;
-          position: relative;
-          overflow: hidden;
-        }
-
-        .cert-card:hover {
-          background: #1e293b;
+        .cert-card-comic:hover {
+          transform: translate(-5px, -5px);
+          box-shadow: 15px 15px 0 var(--accent);
           border-color: var(--accent);
-          transform: translateX(10px);
-          box-shadow: 0 10px 30px rgba(0,0,0, 0.4), 0 0 20px var(--accent-glow);
         }
 
-        .cert-logo-container {
-          width: 60px;
-          height: 60px;
-          flex-shrink: 0;
-          background: white;
-          border-radius: 8px;
-          overflow: hidden;
-          padding: 5px;
+        .cert-logo-comic {
+          width: 70px;
+          height: 70px;
+          background: #fff;
+          border: 3px solid #000;
           display: flex;
           align-items: center;
           justify-content: center;
+          padding: 5px;
+          box-shadow: 4px 4px 0 #000;
         }
 
-        .cert-logo {
+        .cert-logo-comic img {
           max-width: 100%;
           max-height: 100%;
           object-fit: contain;
         }
 
-        .cert-info {
-          display: flex;
-          flex-direction: column;
-          gap: 4px;
+        .cert-name-comic {
+          font-family: 'Bangers', cursive;
+          font-size: 1.4rem;
+          color: #000;
+          line-height: 1.1;
         }
 
-        .cert-title {
-          font-size: 1.2rem;
-          color: #fff;
-          font-weight: 600;
-        }
-
-        .cert-issuer {
-          font-size: 1rem;
-          color: #fff;
-          opacity: 0.9;
-        }
-
-        .cert-issued, .cert-id {
+        .cert-issuer-comic {
+          font-family: 'Comic Neue', cursive;
+          font-weight: 700;
           font-size: 0.9rem;
-          color: var(--text-secondary);
+          color: #666;
         }
 
-        .show-credential-btn {
-          margin-top: 12px;
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 6px 18px;
-          border-radius: 20px;
-          border: 1.5px solid rgba(255, 255, 255, 0.7);
-          color: #fff;
-          font-size: 0.85rem;
-          font-weight: 600;
-          text-decoration: none;
-          transition: all 0.3s ease;
-          width: fit-content;
+        .cert-link-comic {
+          font-family: 'Bangers', cursive;
+          font-size: 1rem;
+          color: var(--accent-secondary);
+          text-decoration: underline;
+          margin-top: auto;
         }
 
-        .show-credential-btn:hover {
-          background: rgba(255, 255, 255, 0.1);
-          border-color: #fff;
-          transform: translateY(-2px);
+        .cert-link-comic:hover {
+          color: var(--accent);
         }
 
-        .arrow-icon { font-size: 0.8rem; }
+        @media (max-width: 1000px) {
+          .main-grid-comic { grid-template-columns: 1fr; }
+        }
 
-        @media (max-width: 768px) {
-          .cert-card {
-            flex-direction: column;
-            gap: 15px;
-          }
-          .cert-logo-container {
-            width: 50px;
-            height: 50px;
-          }
-           .cert-title { font-size: 1.1rem; }
+        @media (max-width: 600px) {
+          .cert-grid-comic { grid-template-columns: 1fr; }
+          .section-title-comic { font-size: 2.5rem; }
         }
       `}</style>
     </div>

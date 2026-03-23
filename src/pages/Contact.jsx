@@ -1,7 +1,50 @@
-import React from 'react';
-import { Send, Github, Linkedin, Mail } from 'lucide-react';
+import React, { useState } from 'react';
+import { Send, Github, Linkedin, Mail, CheckCircle } from 'lucide-react';
 
 const Contact = () => {
+  const [status, setStatus] = useState("IDLE"); // IDLE, SENDING, SUCCESS, ERROR
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("SENDING");
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/adityamaurya510@gmail.com", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          ...formData,
+          _subject: `New Portfolio Message from ${formData.name}`,
+          _template: 'table',
+          _captcha: 'false'
+        })
+      });
+
+      const result = await response.json();
+
+      if (result.success === "true" || response.ok) {
+        setStatus("SUCCESS");
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setStatus("ERROR");
+      }
+    } catch (error) {
+      setStatus("ERROR");
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   return (
     <div className="page-container-comic contact-page">
       <h2 className="page-title-comic">CONTACT</h2>
@@ -17,23 +60,57 @@ const Contact = () => {
           {/* Form Side */}
           <div className="manga-panel form-panel-comic">
             <div className="panel-label-comic">MESSAGE_NODE.EXE</div>
-            <form className="comic-form" onSubmit={(e) => e.preventDefault()}>
-              <div className="comic-input-group">
-                <label>YOUR NAME</label>
-                <input type="text" placeholder="ADITYA MAURYA" />
+            {status === "SUCCESS" ? (
+              <div className="success-overlay-comic">
+                <div className="sfx-text" style={{ top: '-30px', left: '50%', transform: 'translateX(-50%) rotate(5deg)' }}>SUCCESS!</div>
+                <CheckCircle size={80} color="var(--accent)" strokeWidth={3} />
+                <h3 className="section-title-comic" style={{ fontSize: '2rem' }}>MESSAGE TRANSMITTED!</h3>
+                <p className="comic-text">LOGGED IN THE SYSTEM. I'LL GET BACK TO YOU SOON!</p>
+                <button className="comic-submit-btn" onClick={() => setStatus("IDLE")} style={{ marginTop: '20px' }}>
+                  SEND ANOTHER?
+                </button>
               </div>
-              <div className="comic-input-group">
-                <label>YOUR EMAIL</label>
-                <input type="email" placeholder="YOU@EXAMPLE.COM" />
-              </div>
-              <div className="comic-input-group">
-                <label>YOUR MESSAGE</label>
-                <textarea placeholder="TELL ME ABOUT YOUR PROJECT OR ROLE..." rows="5"></textarea>
-              </div>
-              <button type="submit" className="comic-submit-btn" onClick={() => alert("MESSAGE TRANSMITTED!")}>
-                 SEND MESSAGE!
-              </button>
-            </form>
+            ) : (
+              <form className="comic-form" onSubmit={handleSubmit}>
+                <div className="comic-input-group">
+                  <label>YOUR NAME</label>
+                  <input 
+                    type="text" 
+                    name="name"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="ADITYA MAURYA" 
+                  />
+                </div>
+                <div className="comic-input-group">
+                  <label>YOUR EMAIL</label>
+                  <input 
+                    type="email" 
+                    name="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="YOU@EXAMPLE.COM" 
+                  />
+                </div>
+                <div className="comic-input-group">
+                  <label>YOUR MESSAGE</label>
+                  <textarea 
+                    name="message"
+                    required
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="TELL ME ABOUT YOUR PROJECT OR ROLE..." 
+                    rows="5"
+                  ></textarea>
+                </div>
+                <button type="submit" className="comic-submit-btn" disabled={status === "SENDING"}>
+                   {status === "SENDING" ? "TRANSMITTING..." : "SEND MESSAGE!"}
+                </button>
+                {status === "ERROR" && <p style={{ color: 'red', fontFamily: 'Bangers' }}>ERROR IN SYSTEM! TRY AGAIN.</p>}
+              </form>
+            )}
           </div>
 
           {/* Links Side */}
@@ -245,6 +322,23 @@ const Contact = () => {
           font-size: 1.1rem;
           color: #444;
           text-align: center;
+        }
+
+        .success-overlay-comic {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          text-align: center;
+          gap: 15px;
+          min-height: 400px;
+          animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+          0% { transform: scale(0.8); opacity: 0; }
+          100% { transform: scale(1); opacity: 1; }
         }
 
         @media (max-width: 900px) {

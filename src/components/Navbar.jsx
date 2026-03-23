@@ -27,6 +27,8 @@ const Navbar = () => {
                 <li><Link to="/skills">SKILLS</Link></li>
                 <li><Link to="/education">EDUCATION</Link></li>
                 <li><Link to="/experience">EXPERIENCE</Link></li>
+                <li><Link to="/achievements">ACHIEVEMENTS</Link></li>
+                <li><Link to="/learning">LEARNING</Link></li>
               </ul>
             )}
           </li>
@@ -82,15 +84,29 @@ const Navbar = () => {
           transform: translateY(-2px);
         }
 
+        .dropdown-container {
+          position: relative;
+        }
+
         .dropdown-menu-comic {
           position: absolute;
-          top: 100%;
-          right: 0;
+          top: calc(100% + 10px);
+          left: 50%;
+          transform: translateX(-50%);
           background: #fff;
-          border: 3px solid #000;
-          box-shadow: 6px 6px 0 #000;
+          border: 4px solid #000;
+          box-shadow: 8px 8px 0 #000;
           padding: 10px 0;
-          min-width: 180px;
+          min-width: 220px;
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          animation: dropDownPop 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes dropDownPop {
+          0% { transform: translateX(-50%) translateY(-10px) scale(0.9); opacity: 0; }
+          100% { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
         }
 
         .dropdown-menu-comic li {
@@ -98,14 +114,32 @@ const Navbar = () => {
         }
 
         .dropdown-menu-comic a {
-          padding: 10px 20px;
+          padding: 12px 25px;
           display: block;
-          font-size: 1.1rem;
+          font-size: 1.2rem;
+          color: #000;
+          text-decoration: none;
+          transition: 0.2s;
+          border-left: 0 solid var(--accent);
         }
 
         .dropdown-menu-comic a:hover {
-          background: #f0f0f0;
-          color: var(--accent);
+          background: #000;
+          color: #fff;
+          border-left: 10px solid var(--accent);
+          padding-left: 30px;
+        }
+
+        /* SFX pointer for dropdown */
+        .dropdown-menu-comic::before {
+          content: '';
+          position: absolute;
+          top: -15px;
+          left: 50%;
+          transform: translateX(-50%);
+          border-left: 12px solid transparent;
+          border-right: 12px solid transparent;
+          border-bottom: 12px solid #000;
         }
       `}</style>
     </nav>

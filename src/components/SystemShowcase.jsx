@@ -11,7 +11,48 @@ const SystemShowcase = () => {
   const [load, setLoad] = useState(20);
   const [isCaching, setIsCaching] = useState(false);
   const [isScaling, setIsScaling] = useState(false);
-  const [metrics, setMetrics] = useState({ latency: 45, throughput: 1200, cpu: 15 });
+
+  const skillCategories = [
+    {
+      title: "LANGUAGES & CORE",
+      skills: [
+        { name: "C", icon: "C" },
+        { name: "C++", icon: "C++" },
+        { name: "JAVA", icon: "☕" },
+        { name: "PYTHON", icon: "🐍" },
+        { name: "JAVASCRIPT", icon: "JS" },
+        { name: "TYPESCRIPT", icon: "TS" },
+        { name: "HTML/CSS", icon: "🌐" },
+        { name: "DSA", icon: "🧠" },
+        { name: "SQL", icon: "🗄️" }
+      ]
+    },
+    {
+      title: "FRAMEWORKS & QA",
+      skills: [
+        { name: "REACT", icon: "⚛️" },
+        { name: "REDUX", icon: "🔄" },
+        { name: "NODE.JS", icon: "🟢" },
+        { name: "MANUAL TESTING", icon: "✔️" },
+        { name: "SELENIUM", icon: "Se" },
+        { name: "POSTMAN", icon: "🚀" },
+        { name: "JUNIT", icon: "🧪" },
+        { name: "TESTNG", icon: "🧪" }
+      ]
+    },
+    {
+      title: "DEVOPS & TOOLS",
+      skills: [
+        { name: "DOCKER", icon: "🐳" },
+        { name: "DEVOPS", icon: "♾️" },
+        { name: "GIT/GITHUB", icon: "🐙" },
+        { name: "MAVEN", icon: "羽" },
+        { name: "VS CODE", icon: "💻" },
+        { name: "ECLIPSE", icon: "🌑" },
+        { name: "LINUX", icon: "🐧" }
+      ]
+    }
+  ];
 
   useEffect(() => {
     const lines = [
@@ -35,18 +76,7 @@ const SystemShowcase = () => {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const baseLatency = 100;
-    const loadFactor = load / 10;
-    const cacheReduction = isCaching ? 0.7 : 0;
-    const scaleBenefit = isScaling ? 0.5 : 1;
 
-    const newLatency = Math.max(10, Math.floor((baseLatency * loadFactor * scaleBenefit) * (1 - cacheReduction)));
-    const newThroughput = Math.floor((load * 150 * (isScaling ? 2.5 : 1)));
-    const newCPU = Math.min(100, Math.floor((load * 2) / (isScaling ? 2 : 1)));
-
-    setMetrics({ latency: newLatency, throughput: newThroughput, cpu: newCPU });
-  }, [load, isCaching, isScaling]);
 
   return (
     <section className="system-showcase-comic">
@@ -107,21 +137,21 @@ const SystemShowcase = () => {
           </div>
         </div>
 
-        {/* Metrics Row */}
-        <div className="metrics-row-comic">
-          <div className="manga-panel metric-card-comic">
-            <div className="metric-label">LATENCY</div>
-            <div className="metric-value">{metrics.latency}MS</div>
-          </div>
-          <div className="manga-panel metric-card-comic">
-            <div className="metric-label">THROUGHPUT</div>
-            <div className="metric-value">{metrics.throughput.toLocaleString()} R/S</div>
-          </div>
-          <div className="manga-panel metric-card-comic">
-            <div className="metric-label">CPU</div>
-            <div className="metric-value">{metrics.cpu}%</div>
-            <div className="cpu-bar-comic"><div className="fill" style={{ width: `${metrics.cpu}%` }}></div></div>
-          </div>
+        {/* Skills Showcase Grid */}
+        <div className="skills-showcase-manga">
+          {skillCategories.map((cat, idx) => (
+            <div key={idx} className="skill-category-cluster">
+              <div className="cluster-label">{cat.title}</div>
+              <div className="skills-inner-grid">
+                {cat.skills.map((skill, sIdx) => (
+                  <div key={sIdx} className="skill-icon-card">
+                    <div className="icon-wrapper">{skill.icon}</div>
+                    <div className="skill-name">{skill.name}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -268,45 +298,76 @@ const SystemShowcase = () => {
           box-shadow: 4px 4px 0 #000;
         }
 
-        .metrics-row-comic {
+        .skills-showcase-manga {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 30px;
+          gap: 40px;
+          margin-top: 20px;
+        }
+        
+        .skill-category-cluster {
+          background: #111;
+          border: 4px solid #000;
+          padding: 30px 20px;
+          box-shadow: 10px 10px 0 var(--accent);
+          position: relative;
         }
 
-        .metric-card-comic {
-          text-align: center;
-          padding: 20px;
-        }
-
-        .metric-label {
+        .cluster-label {
+          position: absolute;
+          top: -15px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: #000;
+          color: #fff;
+          padding: 2px 20px;
           font-family: 'Bangers', cursive;
           font-size: 1.2rem;
-          color: #888;
+          white-space: nowrap;
+          border: 2px solid #fff;
         }
 
-        .metric-value {
+        .skills-inner-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 15px;
+        }
+
+        .skill-icon-card {
+          background: rgba(255,255,255,0.05);
+          border: 1px solid rgba(255,255,255,0.1);
+          border-radius: 8px;
+          padding: 15px 5px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
+          transition: all 0.2s;
+        }
+
+        .skill-icon-card:hover {
+          background: rgba(255,255,255,0.15);
+          transform: scale(1.05);
+          border-color: var(--accent);
+        }
+
+        .icon-wrapper {
+          font-size: 2rem;
+          color: #fff;
+          font-weight: bold;
+        }
+
+        .skill-name {
+          color: #aaa;
+          font-size: 0.75rem;
           font-family: 'Bangers', cursive;
-          font-size: 2.5rem;
-          color: #000;
-          margin: 10px 0;
+          text-align: center;
+          text-transform: uppercase;
         }
 
-        .cpu-bar-comic {
-          height: 12px;
-          background: #eee;
-          border: 2px solid #000;
-        }
-
-        .cpu-bar-comic .fill {
-          height: 100%;
-          background: var(--accent);
-          transition: width 0.3s;
-        }
-
-        @media (max-width: 900px) {
+        @media (max-width: 1000px) {
+          .skills-showcase-manga { grid-template-columns: 1fr; }
           .panel-grid-comic { grid-template-columns: 1fr; }
-          .metrics-row-comic { grid-template-columns: 1fr; }
           .section-title-comic { font-size: 2.5rem; }
         }
       `}</style>

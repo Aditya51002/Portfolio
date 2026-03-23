@@ -44,31 +44,30 @@ const Layout = ({ children }) => {
         }
 
         .back-to-wheel-btn {
-          position: absolute;
-          top: 30px;
-          left: 60px;
-          padding: 10px 20px;
-          background: var(--glass-bg);
-          backdrop-filter: blur(10px);
-          border: 1px solid var(--border-color);
-          border-radius: 30px;
+          position: fixed;
+          bottom: 30px;
+          left: 30px;
+          padding: 12px 25px;
+          background: #000;
+          border: 3px solid #000;
           color: #fff;
-          font-family: inherit;
-          font-size: 1.05rem;
-          font-weight: 500;
+          font-family: 'Bangers', cursive;
+          font-size: 1.25rem;
           cursor: pointer;
           display: flex;
           align-items: center;
           gap: 10px;
-          transition: all 0.3s ease;
-          z-index: 50;
+          transition: all 0.2s ease;
+          z-index: 1000;
+          box-shadow: 6px 6px 0 var(--accent);
+          text-transform: uppercase;
         }
 
         .back-to-wheel-btn:hover {
-          background: rgba(255, 255, 255, 0.15);
-          transform: translateX(-5px);
-          border-color: var(--accent-light);
-          box-shadow: 0 0 15px var(--accent-glow);
+          transform: translate(-3px, -3px);
+          box-shadow: 10px 10px 0 var(--accent);
+          background: var(--accent);
+          color: #000;
         }
       `}</style>
     </div>
