@@ -11,8 +11,15 @@ const Projects = () => {
       date: "Jan’25 - Present",
       tech: "MERN, MongoDB, Cloudinary, JWT",
       description: "A full-stack platform empowering NGOs with public engagement tools for initiatives, partnerships, and donations.",
-      details: "This project provides a comprehensive solution for NGOs to manage their online presence. Built with the MERN stack, it includes features for managing initiatives, processing donations securely, and facilitating partnerships. Cloudinary is used for media management, providing optimized image delivery, while JWT ensures robust authentication.",
-      github: "https://github.com/Aditya51002",
+      details: [
+        "Built a full-stack NGO platform for Arv Foundation to manage outreach, engagement, and impact at scale.",
+        "Developed a responsive frontend using React + Vite for initiatives, drives, gallery, and multilingual user experience.",
+        "Engineered a secure backend with Node.js/Express + MongoDB to handle forms, applications, contributions, and dynamic content.",
+        "Implemented role-based admin authentication with protected routes for safe content and operations management.",
+        "Created an admin dashboard to manage website sections, images, volunteer/internship/partnership requests, and donation-related data.",
+        "Structured the project for real-world deployment with clean APIs, modular architecture, and maintainable code practices."
+      ],
+      github: "https://github.com/Aditya51002/Arv-Foundation",
       demo: "#"
     },
     {
@@ -21,7 +28,7 @@ const Projects = () => {
       tech: "Java, Java Swing, MongoDB, JWT",
       description: "A modern desktop application streamlining book handling and user management with a gradient-based role-controlled UI.",
       details: "A comprehensive desktop application designed to modernize traditional library operations. Features include a sleek gradient-based UI, role-based access control (Admin/Librarian/User), and robust data handling utilizing MongoDB. Essential functions like book issuance, return tracking, and inventory management are fully automated.",
-      github: "https://github.com/Aditya51002",
+      github: "https://github.com/Aditya51002/Library-Management-System",
       demo: "#"
     },
     {
@@ -130,7 +137,15 @@ const Projects = () => {
               </div>
 
               <div className="modal-body">
-                <p>{selectedProject.details || selectedProject.description}</p>
+                {Array.isArray(selectedProject.details) ? (
+                  <ul className="modal-list">
+                    {selectedProject.details.map((point, i) => (
+                      <li key={i}>{point}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>{selectedProject.details || selectedProject.description}</p>
+                )}
               </div>
 
               <div className="modal-links">
@@ -289,6 +304,40 @@ const Projects = () => {
           border: none;
           font-size: 1.5rem;
           cursor: pointer;
+        }
+
+        .modal-body {
+          margin: 30px 0;
+          max-height: 50vh;
+          overflow-y: auto;
+          scrollbar-width: thin;
+          scrollbar-color: #000 #fff;
+        }
+
+        .modal-list {
+          list-style: none;
+          padding: 0;
+        }
+
+        .modal-list li {
+          font-family: 'Comic Neue', cursive;
+          font-weight: 700;
+          font-size: 1.1rem;
+          color: #333;
+          margin-bottom: 15px;
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+          line-height: 1.4;
+          text-align: left;
+        }
+
+        .modal-list li::before {
+          content: '✔';
+          color: var(--accent);
+          font-weight: 900;
+          flex-shrink: 0;
+          margin-top: 2px;
         }
       `}</style>
     </div>

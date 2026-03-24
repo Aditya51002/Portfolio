@@ -23,7 +23,6 @@ const Skills = () => {
             <li>JAVASCRIPT & TYPESCRIPT</li>
             <li>JAVA & KOTLIN</li>
             <li>PYTHON</li>
-            <li>C & C++</li>
             <li>HTML & CSS</li>
             <li>SQL</li>
           </ul>
@@ -65,9 +64,25 @@ const Skills = () => {
           </div>
           <ul className="skill-list-comic">
             <li>GIT & GITHUB</li>
+            <li>VS Code</li>
+            <li>Eclipse</li>
             <li>DOCKER</li>
             <li>POSTMAN</li>
             <li>ALGORITHMS & DS</li>
+          </ul>
+        </div>
+
+        {/* Soft Skills */}
+        <div className="skill-panel-comic">
+          <div className="panel-header-comic">
+            <h3>SOFT SKILLS</h3>
+            <div className="dot-comic purple"></div>
+          </div>
+          <ul className="skill-list-comic">
+            <li>COMMUNICATION</li>
+            <li>TEAMWORK</li>
+            <li>PROBLEM SOLVING</li>
+            <li>ADAPTABILITY</li>
           </ul>
         </div>
       </div>
@@ -152,6 +167,7 @@ const Skills = () => {
         .yellow { background: #facc15; }
         .pink { background: #f472b6; }
         .blue { background: #60a5fa; }
+        .purple { background: #a855f7; }
 
         .skill-list-comic {
           list-style: none;

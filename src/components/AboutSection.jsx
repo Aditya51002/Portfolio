@@ -76,7 +76,7 @@ const AboutSection = () => {
           color: #000;
           text-align: center;
           margin-bottom: 60px;
-          -webkit-text-stroke: 1.5px #000;
+          -webkit-text-stroke: 1px #000;
         }
 
         .highlight-comic {
@@ -141,7 +141,7 @@ const AboutSection = () => {
 
         .panel-text {
           font-family: 'Comic Neue', cursive;
-          font-weight: 700;
+          font-weight: 400;
           font-size: 1.1rem;
           color: #333;
         }

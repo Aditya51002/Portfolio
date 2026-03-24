@@ -44,7 +44,7 @@ const Landing = () => {
             initial="hidden"
             animate="show"
           >
-            <div className="sfx-text" style={{ top: '-20px', left: '-20px', transform: 'rotate(-10deg)' }}>WHOOSH!</div>
+            <div className="sfx-text" style={{ top: '-35px', left: '-50px', transform: 'rotate(-12deg)', fontSize: '3.5rem' }}>WHOOSH!</div>
             
             <div className="hero-text-side">
               <motion.div variants={itemVariants} className="hero-badge-comic">
@@ -171,8 +171,8 @@ const Landing = () => {
           font-size: 6rem;
           line-height: 0.9;
           color: #000;
-          -webkit-text-stroke: 2px #000;
-          text-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+          -webkit-text-stroke: 1px #000;
+          text-shadow: 6px 6px 0 rgba(0,0,0,0.05);
         }
 
         .hero-subtitle {
@@ -184,9 +184,9 @@ const Landing = () => {
 
         .hero-description {
           font-family: 'Comic Neue', cursive;
-          font-weight: 700;
-          font-size: 1.2rem;
-          color: #333;
+          font-weight: 600;
+          font-size: 1.15rem;
+          color: #444;
           max-width: 90%;
           text-transform: uppercase;
         }

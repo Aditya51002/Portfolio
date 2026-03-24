@@ -28,6 +28,24 @@ const Learning = () => {
           <h3 className="learning-title-comic">DEVOPS & CLOUD</h3>
           <p className="learning-desc-comic">MASTERING DOCKER, CI/CD PIPELINES, AND AWS TO STREAMLINE DEPLOYMENT WORKFLOWS.</p>
         </div>
+
+        <div className="manga-panel learning-item-comic">
+          <div className="panel-label-comic">STAGE_04</div>
+          <h3 className="learning-title-comic">SPRING BOOT & MICROSERVICES</h3>
+          <p className="learning-desc-comic">BEYOND NODE.JS: BUILDING ENTERPRISE-GRADE BACKENDS WITH JAVA AND SPRING ECOSYSTEM.</p>
+        </div>
+
+        <div className="manga-panel learning-item-comic">
+          <div className="panel-label-comic">STAGE_05</div>
+          <h3 className="learning-title-comic">ADVANCED SOFTWARE TESTING</h3>
+          <p className="learning-desc-comic">MASTERING JUNIT, MOCKITO, AND INTEGRATION TESTING FOR ROBUST, BUG-FREE SOFTWARE DELIVERY.</p>
+        </div>
+
+        <div className="manga-panel learning-item-comic">
+          <div className="panel-label-comic">STAGE_06</div>
+          <h3 className="learning-title-comic">AI & MACHINE LEARNING</h3>
+          <p className="learning-desc-comic">EXPLORING NEURAL NETWORKS AND LLMS TO INTEGRATE INTELLIGENT CAPABILITIES INTO PRACTICAL APPS.</p>
+        </div>
       </div>
 
       <style>{`

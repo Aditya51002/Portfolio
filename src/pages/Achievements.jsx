@@ -118,16 +118,16 @@ const Achievements = () => {
 
         .section-title-comic {
           font-family: 'Bangers', cursive;
-          font-size: 4rem;
+          font-size: 3.5rem;
           color: #000;
           margin-bottom: 20px;
         }
 
         .comic-text {
           font-family: 'Comic Neue', cursive;
-          font-weight: 700;
-          font-size: 1.4rem;
-          color: #333;
+          font-weight: 600;
+          font-size: 1.3rem;
+          color: #444;
         }
 
         .main-grid-comic {
@@ -186,10 +186,10 @@ const Achievements = () => {
 
         .sub-header-comic {
           font-family: 'Bangers', cursive;
-          font-size: 3rem;
+          font-size: 2.5rem;
           color: #000;
           margin-bottom: 30px;
-          border-bottom: 5px solid #000;
+          border-bottom: 4px solid #000;
           width: fit-content;
         }
 

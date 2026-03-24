@@ -49,15 +49,20 @@ const CommandCenter = () => {
 
       {/* Resume Portal */}
       <div className="resume-section">
-        <motion.button 
+        <motion.a 
+          href="/Aditya_Cv.pdf"
+          download="Aditya_Cv.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
           className="resume-download-btn"
           whileHover={{ scale: 1.05, boxShadow: '0 0 20px var(--accent-glow)' }}
           whileTap={{ scale: 0.95 }}
+          style={{ textDecoration: 'none' }}
         >
           <span className="btn-icon">📄</span>
           <span className="btn-label">Get Resume</span>
-          <span className="file-info">PDF • 240KB</span>
-        </motion.button>
+          <span className="file-info">PDF • 173KB</span>
+        </motion.a>
       </div>
 
       <style>{`
