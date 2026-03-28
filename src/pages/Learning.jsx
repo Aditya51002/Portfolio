@@ -1,151 +1,417 @@
 const Learning = () => {
+  const learningMissions = [
+    {
+      id: "ARC_01",
+      title: "ADVANCED SYSTEM DESIGN",
+      desc: "DIVING DEEP INTO DISTRIBUTED SYSTEMS, MICROSERVICES ARCHITECTURES, AND SCALABLE BACKENDS.",
+      difficulty: 5,
+      xp: 85,
+      icon: "⚡",
+      sfx: "SURGE!",
+      status: "DOMINATING"
+    },
+    {
+      id: "ARC_02",
+      title: "NEXT.JS & SSR",
+      desc: "TRANSITIONING TO ROBUST, SEO-FRIENDLY FRAMEWORKS FOR ENTERPRISE-LEVEL FRONTEND DEVELOPMENT.",
+      difficulty: 4,
+      xp: 92,
+      icon: "⚛️",
+      sfx: "GLITCH!",
+      status: "AWAKENED"
+    },
+    {
+      id: "ARC_03",
+      title: "DEVOPS & CLOUD",
+      desc: "MASTERING DOCKER, CI/CD PIPELINES, AND AWS TO STREAMLINE DEPLOYMENT WORKFLOWS.",
+      difficulty: 4,
+      xp: 78,
+      icon: "🐳",
+      sfx: "BOOM!",
+      status: "DEPLOYED"
+    },
+    {
+      id: "ARC_04",
+      title: "SPRING BOOT & MICROSERVICES",
+      desc: "BEYOND NODE.JS: BUILDING ENTERPRISE-GRADE BACKENDS WITH JAVA AND SPRING ECOSYSTEM.",
+      difficulty: 5,
+      xp: 65,
+      icon: "☕",
+      sfx: "CRACKLE!",
+      status: "ENGAGED"
+    },
+    {
+      id: "ARC_05",
+      title: "ADVANCED SOFTWARE TESTING",
+      desc: "MASTERING JUNIT, MOCKITO, AND INTEGRATION TESTING FOR ROBUST, BUG-FREE SOFTWARE DELIVERY.",
+      difficulty: 3,
+      xp: 98,
+      icon: "🧪",
+      sfx: "PRECISION!",
+      status: "PURIFIED"
+    },
+    {
+      id: "ARC_06",
+      title: "AI & MACHINE LEARNING",
+      desc: "EXPLORING NEURAL NETWORKS AND LLMS TO INTEGRATE INTELLIGENT CAPABILITIES INTO PRACTICAL APPS.",
+      difficulty: 5,
+      xp: 45,
+      icon: "🧠",
+      sfx: "EXPAND!",
+      status: "UNCERTAIN"
+    }
+  ];
+
   return (
     <div className="page-container-comic learning-page">
-      <h2 className="page-title-comic">CURRENT FOCUS</h2>
+      <div className="halftone-overlay"></div>
       
-      <div className="learning-intro-comic">
-        <div className="manga-panel focus-hero-panel">
-          <div className="sfx-text-comic">SLAM!</div>
-          <p className="comic-text">I AM CONTINUOUSLY EXPLORING NEW TECHNOLOGIES TO STAY AHEAD OF THE CURVE AND REFINE MY TECHNICAL STACK.</p>
+      <div className="learning-hero-banner">
+        <div className="rank-badge">S-RANK CANDIDATE</div>
+        <h2 className="title-comic-xl">SKILL <span className="highlight-magenta">AWAKENING</span></h2>
+        <div className="chapter-subtitle">ROADMAP TO TECHNICAL SINGULARITY</div>
+      </div>
+
+      <div className="learning-intro-panel">
+        <div className="manga-panel training-grounds">
+          <div className="panel-label-top">TRAINING GROUNDS</div>
+          <p className="mission-briefing">
+            "THE PATH TO MASTERY IS NOT A STRAIGHT LINE. EACH ARC REPRESENTS A NEW FRONTIER, A NEW BATTLE, AND A NEW OPPORTUNITY TO TRANSCEND CURRENT LIMITATIONS."
+          </p>
+          <div className="status-dock">
+            <div className="status-item"><span className="label">HP:</span> 100/100</div>
+            <div className="status-item"><span className="label">MP:</span> 99/99</div>
+            <div className="status-item"><span className="label">STR:</span> 95</div>
+          </div>
         </div>
       </div>
 
-      <div className="learning-grid-comic">
-        <div className="manga-panel learning-item-comic">
-          <div className="panel-label-comic">STAGE_01</div>
-          <h3 className="learning-title-comic">ADVANCED SYSTEM DESIGN</h3>
-          <p className="learning-desc-comic">DIVING DEEP INTO DISTRIBUTED SYSTEMS, MICROSERVICES ARCHITECTURES, AND SCALABLE BACKENDS.</p>
-        </div>
+      <div className="roadmap-path-container">
+        {learningMissions.map((mission, idx) => (
+          <div 
+            key={mission.id} 
+            className={`mission-arc-panel ${idx % 2 === 0 ? 'path-left' : 'path-right'}`}
+          >
+            <div className="manga-panel quest-card">
+              <div className="arc-indicator">{mission.id}</div>
+              <div className="status-tab">{mission.status}</div>
+              
+              <div className="quest-header">
+                <div className="quest-icon-frame">{mission.icon}</div>
+                <div className="quest-title-info">
+                  <h3 className="quest-label">{mission.title}</h3>
+                  <div className="diff-meter">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} className={i < mission.difficulty ? "star active" : "star"}>★</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
 
-        <div className="manga-panel learning-item-comic">
-          <div className="panel-label-comic">STAGE_02</div>
-          <h3 className="learning-title-comic">NEXT.JS & SSR</h3>
-          <p className="learning-desc-comic">TRANSITIONING TO ROBUST, SEO-FRIENDLY FRAMEWORKS FOR ENTERPRISE-LEVEL FRONTEND DEVELOPMENT.</p>
-        </div>
+              <p className="quest-brief">{mission.desc}</p>
 
-        <div className="manga-panel learning-item-comic">
-          <div className="panel-label-comic">STAGE_03</div>
-          <h3 className="learning-title-comic">DEVOPS & CLOUD</h3>
-          <p className="learning-desc-comic">MASTERING DOCKER, CI/CD PIPELINES, AND AWS TO STREAMLINE DEPLOYMENT WORKFLOWS.</p>
-        </div>
+              <div className="progress-section">
+                <div className="xp-info">
+                  <span>MASTERY PROGRESS</span>
+                  <span>XP {mission.xp}%</span>
+                </div>
+                <div className="neon-progress-bar">
+                  <div className="neon-fill" style={{ width: `${mission.xp}%` }}></div>
+                </div>
+              </div>
 
-        <div className="manga-panel learning-item-comic">
-          <div className="panel-label-comic">STAGE_04</div>
-          <h3 className="learning-title-comic">SPRING BOOT & MICROSERVICES</h3>
-          <p className="learning-desc-comic">BEYOND NODE.JS: BUILDING ENTERPRISE-GRADE BACKENDS WITH JAVA AND SPRING ECOSYSTEM.</p>
-        </div>
-
-        <div className="manga-panel learning-item-comic">
-          <div className="panel-label-comic">STAGE_05</div>
-          <h3 className="learning-title-comic">ADVANCED SOFTWARE TESTING</h3>
-          <p className="learning-desc-comic">MASTERING JUNIT, MOCKITO, AND INTEGRATION TESTING FOR ROBUST, BUG-FREE SOFTWARE DELIVERY.</p>
-        </div>
-
-        <div className="manga-panel learning-item-comic">
-          <div className="panel-label-comic">STAGE_06</div>
-          <h3 className="learning-title-comic">AI & MACHINE LEARNING</h3>
-          <p className="learning-desc-comic">EXPLORING NEURAL NETWORKS AND LLMS TO INTEGRATE INTELLIGENT CAPABILITIES INTO PRACTICAL APPS.</p>
-        </div>
+              <div className="card-sfx">{mission.sfx}</div>
+              <div className="speed-lines-overlay"></div>
+            </div>
+          </div>
+        ))}
       </div>
 
       <style>{`
         .learning-page {
-          padding: 60px;
+          padding: 80px 20px;
           background: #fff;
+          position: relative;
+          overflow-x: hidden;
+          min-height: 100vh;
         }
 
-        .page-title-comic {
+        .halftone-overlay {
+          position: fixed;
+          inset: 0;
+          background-image: radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+          background-size: 15px 15px;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .learning-hero-banner {
+          text-align: center;
+          margin-bottom: 60px;
+          position: relative;
+          z-index: 1;
+        }
+
+        .rank-badge {
+          display: inline-block;
+          background: #000;
+          color: #fff;
+          padding: 5px 20px;
           font-family: 'Bangers', cursive;
-          font-size: 5rem;
+          font-size: 1.2rem;
+          margin-bottom: 20px;
+          transform: skewX(-10deg);
+          box-shadow: 5px 5px 0 var(--accent);
+        }
+
+        .title-comic-xl {
+          font-family: 'Bangers', cursive;
+          font-size: 7rem;
           color: #000;
-          text-align: center;
-          margin-bottom: 40px;
+          line-height: 0.85;
+          margin-bottom: 10px;
+          text-transform: uppercase;
+        }
+
+        .highlight-magenta {
+          color: var(--accent);
           -webkit-text-stroke: 2px #000;
-          text-shadow: 4px 4px 0 var(--accent);
+          text-shadow: 8px 8px 0 rgba(0,0,0,0.1);
         }
 
-        .focus-hero-panel {
+        .chapter-subtitle {
+          font-family: 'Bangers', cursive;
+          font-size: 1.8rem;
+          color: #333;
+          letter-spacing: 3px;
+        }
+
+        .learning-intro-panel {
+          max-width: 900px;
+          margin: 0 auto 100px;
+          position: relative;
+          z-index: 1;
+        }
+
+        .training-grounds {
+          background: #fff;
+          border: 6px solid #000;
+          padding: 50px;
           text-align: center;
-          margin-bottom: 50px;
-          padding: 40px;
-          background-image: radial-gradient(circle, #eee 1px, transparent 1px);
-          background-size: 10px 10px;
+          box-shadow: 15px 15px 0 rgba(0,0,0,0.1);
         }
 
-        .sfx-text-comic {
+        .panel-label-top {
           position: absolute;
           top: -20px;
-          right: -20px;
-          background: var(--accent);
+          left: 50%;
+          transform: translateX(-50%);
+          background: #000;
           color: #fff;
+          padding: 5px 30px;
           font-family: 'Bangers', cursive;
-          font-size: 2rem;
-          padding: 5px 15px;
-          transform: rotate(15deg);
-          border: 3px solid #000;
-          box-shadow: -4px 4px 0 #000;
+          font-size: 1.4rem;
+          border: 3px solid #fff;
         }
 
-        .comic-text {
+        .mission-briefing {
           font-family: 'Comic Neue', cursive;
-          font-weight: 700;
-          font-size: 1.2rem;
+          font-weight: 800;
+          font-size: 1.4rem;
+          color: #222;
+          max-width: 800px;
+          margin: 0 auto 30px;
+          line-height: 1.4;
+          font-style: italic;
+        }
+
+        .status-dock {
+          display: flex;
+          justify-content: center;
+          gap: 40px;
+          border-top: 4px solid #000;
+          padding-top: 30px;
+        }
+
+        .status-item {
+          font-family: 'Bangers', cursive;
+          font-size: 1.5rem;
           color: #333;
         }
 
-        .learning-grid-comic {
+        .status-item .label {
+          color: var(--accent);
+          margin-right: 5px;
+        }
+
+        .roadmap-path-container {
+          max-width: 1200px;
+          margin: 0 auto;
           display: flex;
           flex-direction: column;
-          gap: 30px;
-          max-width: 900px;
-          margin: 0 auto;
-        }
-
-        .manga-panel {
-          border: 4px solid #000;
-          background: #fff;
-          box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+          gap: 40px;
           position: relative;
-          padding: 30px;
-          transition: 0.2s;
         }
 
-        .learning-item-comic:hover {
-          transform: translateX(10px);
-          border-left: 15px solid var(--accent);
-          box-shadow: 15px 15px 0 #000;
+        .mission-arc-panel {
+          width: 60%;
+          z-index: 1;
         }
 
-        .panel-label-comic {
+        .path-left { align-self: flex-start; }
+        .path-right { align-self: flex-end; }
+
+        .quest-card {
+          border: 5px solid #000;
+          background: #fff;
+          padding: 40px;
+          position: relative;
+          box-shadow: 12px 12px 0 #000;
+          overflow: hidden;
+          transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .quest-card:hover {
+          transform: scale(1.03) translateY(-10px) !important;
+          box-shadow: 20px 20px 0 var(--accent);
+          border-color: var(--accent);
+        }
+
+        .quest-card:hover .speed-lines-overlay {
+          opacity: 0.15;
+          transform: scale(1.2);
+        }
+
+        .arc-indicator {
           position: absolute;
           top: -15px;
-          left: 20px;
+          left: 30px;
           background: #000;
           color: #fff;
-          padding: 2px 15px;
+          padding: 2px 20px;
           font-family: 'Bangers', cursive;
-          font-size: 1.1rem;
+          font-size: 1.3rem;
+          z-index: 2;
         }
 
-        .learning-title-comic {
+        .status-tab {
+          position: absolute;
+          top: 0;
+          right: 0;
+          background: var(--accent);
+          color: #fff;
+          padding: 5px 20px;
           font-family: 'Bangers', cursive;
-          font-size: 2rem;
+          font-size: 1rem;
+          transform: rotate(0deg);
+        }
+
+        .quest-header {
+          display: flex;
+          gap: 25px;
+          align-items: center;
+          margin-bottom: 25px;
+        }
+
+        .quest-icon-frame {
+          width: 80px;
+          height: 80px;
+          border: 4px solid #000;
+          background: #f1f5f9;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 3rem;
+          box-shadow: 6px 6px 0 #000;
+        }
+
+        .quest-label {
+          font-family: 'Bangers', cursive;
+          font-size: 2.2rem;
           color: #000;
-          margin-bottom: 10px;
+          line-height: 1;
+          margin-bottom: 5px;
         }
 
-        .learning-desc-comic {
+        .diff-meter {
+          display: flex;
+          gap: 5px;
+        }
+
+        .star { font-size: 1.2rem; color: #ddd; }
+        .star.active { color: var(--accent); }
+
+        .quest-brief {
           font-family: 'Comic Neue', cursive;
           font-weight: 700;
-          font-size: 1.1rem;
+          font-size: 1.15rem;
           color: #444;
+          margin-bottom: 35px;
+          line-height: 1.4;
         }
 
-        @media (max-width: 768px) {
-          .page-title-comic { font-size: 3rem; }
+        .progress-section {
+          margin-top: auto;
+        }
+
+        .xp-info {
+          display: flex;
+          justify-content: space-between;
+          font-family: 'Bangers', cursive;
+          font-size: 1.1rem;
+          margin-bottom: 10px;
+          color: #000;
+        }
+
+        .neon-progress-bar {
+          height: 18px;
+          background: #eee;
+          border: 3px solid #000;
+          position: relative;
+        }
+
+        .neon-fill {
+          height: 100%;
+          background: var(--accent);
+          box-shadow: 0 0 15px var(--accent);
+          transition: width 1.5s ease-out;
+        }
+
+        .card-sfx {
+          position: absolute;
+          bottom: 20px;
+          right: 20px;
+          font-family: 'Bangers', cursive;
+          font-size: 2rem;
+          color: rgba(0,0,0,0.05);
+          text-transform: uppercase;
+          transform: rotate(-10deg);
+          pointer-events: none;
+        }
+
+        .speed-lines-overlay {
+          position: absolute;
+          inset: 0;
+          background-image: 
+            linear-gradient(45deg, transparent 48%, #000 49%, #000 51%, transparent 52%),
+            linear-gradient(-45deg, transparent 48%, #000 49%, #000 51%, transparent 52%);
+          background-size: 30px 30px;
+          opacity: 0;
+          transition: all 0.4s ease;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        @media (max-width: 1000px) {
+          .mission-arc-panel { width: 100%; }
+          .title-comic-xl { font-size: 4rem; }
+          .status-dock { flex-direction: column; align-items: center; gap: 10px; }
+          .quest-header { flex-direction: column; align-items: flex-start; }
+          .path-left, .path-right { align-self: center; }
         }
       `}</style>
     </div>
   );
 };
+
 export default Learning;

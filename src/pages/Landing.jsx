@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import WheelDial from '../components/WheelDial';
-import SystemShowcase from '../components/SystemShowcase';
 import CommandCenter from '../components/CommandCenter';
 import AboutSection from '../components/AboutSection';
+import SystemShowcase from '../components/SystemShowcase';
+import ProfileStatBoard from '../components/ProfileStatBoard';
 
 const Landing = () => {
   const [showWheel, setShowWheel] = useState(false);
@@ -57,7 +58,7 @@ const Landing = () => {
               </motion.h1>
 
               <motion.h2 variants={itemVariants} className="hero-subtitle">
-                MERN STACK • SDET • INNOVATOR
+                WEB DEVELOPER • SOFTWARE ENGINEER • ANDROID DEVELOPER
               </motion.h2>
 
               <motion.p variants={itemVariants} className="hero-description">
@@ -84,7 +85,10 @@ const Landing = () => {
                 variants={itemVariants}
                 whileHover={{ scale: 1.02, rotate: 1 }}
               >
-                <img src="/portrait-placeholder.png" alt="Aditya Maurya" className="hero-profile-img" />
+                <img src="/hero_manga.png" alt="Aditya Maurya Manga Portrait" className="hero-profile-img" />
+                <div className="stat-board-overlay">
+                  <ProfileStatBoard />
+                </div>
                 <div className="caption-box">DEVELOPER / ARCHITECT</div>
               </motion.div>
             </div>
@@ -112,7 +116,7 @@ const Landing = () => {
       {/* About Section extracted from About page */}
       <AboutSection />
 
-      {/* High-end technical showcase targeting FAANG recruiters */}
+      {/* Engineering Excellence Status Board / Icon Cards */}
       <SystemShowcase />
 
       <style>{`
@@ -210,39 +214,58 @@ const Landing = () => {
 
         .hero-image-side {
           flex: 0.8;
-          background: #eee;
+          background: #222;
           display: flex;
           justify-content: center;
           align-items: center;
-          padding: 40px;
+          padding: 30px;
+          overflow: hidden;
         }
 
         .portrait-panel {
           width: 100%;
           height: 100%;
           border: 4px solid #000;
-          background: #fff;
+          background: #000;
           position: relative;
-          box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+          box-shadow: 10px 10px 0 rgba(0,0,0,0.3);
+          overflow: hidden;
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
         }
 
         .hero-profile-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          filter: grayscale(1) contrast(1.2);
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 1;
+        }
+
+        .stat-board-overlay {
+          position: absolute;
+          bottom: 20px;
+          left: 20px;
+          right: 20px;
+          z-index: 2;
+          transform: scale(0.9);
+          transform-origin: bottom center;
         }
 
         .caption-box {
           position: absolute;
-          bottom: 20px;
-          right: -20px;
+          top: 20px;
+          right: -10px;
           background: #fff;
           border: 3px solid #000;
           padding: 5px 15px;
           font-family: 'Bangers', cursive;
           font-size: 1.2rem;
           box-shadow: 4px 4px 0 #000;
+          z-index: 3;
         }
 
         .wheel-overlay-comic {

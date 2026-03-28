@@ -1,5 +1,6 @@
 import Navbar from './Navbar';
 import AnimatedBackground from './AnimatedBackground';
+import MissionFooter from './MissionFooter';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const Layout = ({ children }) => {
@@ -22,6 +23,7 @@ const Layout = ({ children }) => {
           </button>
         )}
         {children}
+        <MissionFooter />
       </main>
 
       <style>{`

@@ -4,13 +4,11 @@ import { motion } from 'framer-motion';
 const CommandCenter = () => {
   const socialLinks = [
     { name: 'GitHub', url: 'https://github.com/Aditya51002', icon: '⚡' },
-    { name: 'LinkedIn', url: 'https://linkedin.com/in/aditya-maurya', icon: '🔗' },
-    { name: 'Twitter', url: '#', icon: '🐦' },
     { name: 'Mail', url: 'mailto:contact@adityamaurya.com', icon: '✉️' }
   ];
 
   return (
-    <motion.div 
+    <motion.div
       className="command-center-dock glass"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
@@ -49,7 +47,7 @@ const CommandCenter = () => {
 
       {/* Resume Portal */}
       <div className="resume-section">
-        <motion.a 
+        <motion.a
           href="/Aditya_Cv.pdf"
           download="Aditya_Cv.pdf"
           target="_blank"
