@@ -1,9 +1,25 @@
 const Achievements = () => {
   const certifications = [
     {
+      title: "ORACLE DATA PLATFORM 2025 CERTIFIED FOUNDATIONS ASSOCIATE",
+      issuer: "ORACLE",
+      issued: "MAR 2026",
+      platform: "ORACLE",
+      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVtVfByN7kOqYqP3Z6Lh6s5M7o4_8M9_O3-A&s",
+      link: "https://drive.google.com/file/d/1klri2vYQTX4mBETpnfs_mStKc4L88fKv/view?usp=drive_link"
+    },
+    {
+      title: "ORACLE CLOUD INFRASTRUCTURE 2025 CERTIFIED AI FOUNDATIONS ASSOCIATE",
+      issuer: "ORACLE",
+      issued: "APR 2026",
+      platform: "ORACLE",
+      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVtVfByN7kOqYqP3Z6Lh6s5M7o4_8M9_O3-A&s",
+      link: "https://drive.google.com/file/d/1kbBiscNmtBv0cTbFgKY0psqgU2in-TMk/view?usp=drive_link"
+    },
+    {
       title: "PRIVACY AND SECURITY IN SOCIAL MEDIA",
       issuer: "NPTEL",
-      issued: "JAN 2025",
+      issued: "NOV 2025",
       platform: "NPTEL",
       logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVtVfByN7kOqYqP3Z6Lh6s5M7o4_8M9_O3-A&s",
       link: "https://nptel.ac.in/noc/E_Certificate/NPTEL25CS117S145870213010337429"
